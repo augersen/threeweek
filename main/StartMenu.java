@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class StartMenu extends Application {
-
+    //test
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Breakout");
