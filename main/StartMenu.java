@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 public class StartMenu extends Application {
     //test
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Breakout");
 
         //Breakout title
