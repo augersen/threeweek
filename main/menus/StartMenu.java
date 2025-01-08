@@ -13,10 +13,16 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+
 import main.Main;
 
 public class StartMenu extends Application {
-    //test
+
+    private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Breakout");
@@ -44,7 +50,8 @@ public class StartMenu extends Application {
             try {
                 battlepassMenu.start(primaryStage);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
+
             }
         });
         battlepassButton.setStyle("-fx-font-size: 20; -fx-background-color: YELLOW;");
@@ -56,7 +63,8 @@ public class StartMenu extends Application {
             try {
                 highscoresMenu.start(primaryStage);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
+
             }
         });
         highscoresButton.setStyle("-fx-font-size: 20; -fx-background-color: LIGHTBLUE;");
