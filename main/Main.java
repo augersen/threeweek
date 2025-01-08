@@ -1,6 +1,7 @@
 package main;
 
 import javafx.application.Application;
+import main.menus.StartMenu;
 
 import javax.swing.JFrame;
 
