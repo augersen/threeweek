@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class Main {
     public static void main(String[] args){
         //startGame();
-        //test
+
         //Startmenu
         Application.launch(StartMenu.class, args);
     }
