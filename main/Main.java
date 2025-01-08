@@ -1,10 +1,15 @@
 package main;
 
+import javafx.application.Application;
+
 import javax.swing.JFrame;
 
 public class Main {
     public static void main(String[] args){
-        startGame();
+        //startGame();
+
+        //Startmenu
+        Application.launch(StartMenu.class, args);
     }
 
     public static void startGame(){ //Will later become main, this is temporary for testing purposes.
