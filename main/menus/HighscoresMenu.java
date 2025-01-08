@@ -45,8 +45,13 @@ public class HighscoresMenu extends Application {
         // Generate 20 Highscore Entries as Text
         for (int i = 1; i <= 20; i++) {
             Text highscoreText = new Text(i + ". Player" + i + " - " + (1000 - i * 10) + " Points");
-            highscoreText.setFont(Font.font("Arial", FontWeight.NORMAL, 16));
-            highscoreText.setFill(Color.WHITE);
+            highscoreText.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
+            highscoreText.setFill(new LinearGradient(
+                    0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
+                    new Stop(0, Color.GOLD),
+                    new Stop(0.5, Color.SILVER),
+                    new Stop(1, Color.PALEGREEN)
+            ));
 
             // Add each high score text to the column
             highscoreColumn.getChildren().add(highscoreText);
