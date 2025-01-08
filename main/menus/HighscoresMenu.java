@@ -15,7 +15,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+
 public class HighscoresMenu extends Application {
+
+    private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
 
     @Override
     public void start(Stage primaryStage) {
@@ -72,7 +78,7 @@ public class HighscoresMenu extends Application {
             try {
                 mainMenu.start(primaryStage);
             } catch (Exception ex) {
-                ex.printStackTrace();
+                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
             }
         });
         backButton.setStyle("-fx-font-size: 16; -fx-background-color: DARKGRAY;");
