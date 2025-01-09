@@ -1,0 +1,83 @@
+/* styles.css */
+
+/* Background colors */
+.scene-background {
+    -fx-background-color: black;
+}
+
+/* Text styling */
+.title-text {
+    -fx-font-size: 50px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 0%, red, orange, yellow);
+}
+
+.content-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial";
+    -fx-fill: white;
+}
+
+.highscore-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial";
+    -fx-fill: linear-gradient(from 0% 0% to 100% 0%, gold, silver, palegreen);
+}
+
+/* Button styles */
+.default-button {
+    -fx-font-size: 16px;
+    -fx-background-color: darkgray;
+}
+
+.play-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #5df85d;
+}
+
+.battlepass-button {
+    -fx-font-size: 20px;
+    -fx-background-color: yellow;
+}
+
+.highscore-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #1092d5;
+}
+
+.quit-button {
+    -fx-font-size: 20px;
+    -fx-background-color: red;
+}
+
+.start-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #61fa61;
+}
+
+/* ScrollPane background */
+.scrollpane-background {
+    -fx-background: #000000;
+}
+
+/* Center text */
+.centered-text {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+/* VBox alignment */
+.center-aligned {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+}
+
+/* Award box styling */
+.award-box {
+    -fx-fill: lightblue; /* Change this to your desired background color */
+    -fx-stroke: white;   /* Optional: Add a border */
+    -fx-stroke-width: 2; /* Optional: Set the border thickness */
+}
+

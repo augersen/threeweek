@@ -4,98 +4,83 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-
 public class StartMenu extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(StartMenu.class.getName());
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Breakout");
 
-        //Breakout title
+        // Title
         Text title = new Text("Breakout");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        title.setFill(new LinearGradient(
-                0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.RED),
-                new Stop(0.5, Color.ORANGE),
-                new Stop(1, Color.YELLOW)
-        ));
+        title.getStyleClass().addAll("title-text", "centered-text");
 
-        //SelectionMenu button
+        //select modifiers
         Button selectionButton = new Button("Play!");
+        selectionButton.getStyleClass().add("play-button");
         selectionButton.setOnAction(e -> {
-            SelectionMenu selectionMenu = new SelectionMenu();
             try {
+                SelectionMenu selectionMenu = new SelectionMenu();
                 selectionMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
-
+                LOGGER.log(Level.SEVERE, "An error occurred while opening SelectionMenu", ex);
             }
-        });
-        selectionButton.setStyle("-fx-font-size: 20; -fx-background-color: YELLOW;");
 
-        //Battlepass button
+        });
+
+        //battlepass
         Button battlepassButton = new Button("Battle Pass");
+        battlepassButton.getStyleClass().add("battlepass-button");
         battlepassButton.setOnAction(e -> {
-            BattlepassMenu battlepassMenu = new BattlepassMenu();
             try {
+                BattlepassMenu battlepassMenu = new BattlepassMenu();
                 battlepassMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
-
+                LOGGER.log(Level.SEVERE, "An error occurred while opening BattlepassMenu", ex);
             }
-        });
-        battlepassButton.setStyle("-fx-font-size: 20; -fx-background-color: YELLOW;");
 
-        //Highscores
+        });
+
+        //highscores
         Button highscoresButton = new Button("Highscores");
+        highscoresButton.getStyleClass().add("highscore-button");
         highscoresButton.setOnAction(e -> {
-            HighscoresMenu highscoresMenu = new HighscoresMenu();
             try {
+                HighscoresMenu highscoresMenu = new HighscoresMenu();
                 highscoresMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
-
+                LOGGER.log(Level.SEVERE, "An error occurred while opening HighscoresMenu", ex);
             }
+
         });
-        highscoresButton.setStyle("-fx-font-size: 20; -fx-background-color: LIGHTBLUE;");
 
-        //Quit Button
+        //quit button
         Button quitButton = new Button("Quit Game");
+        quitButton.getStyleClass().add("quit-button");
         quitButton.setOnAction(e -> System.exit(0));
-        quitButton.setStyle("-fx-font-size: 20; -fx-background-color: RED;");
 
-        //Layout
-        VBox menu = new VBox(20);
-        menu.getChildren().addAll(title,selectionButton, battlepassButton, highscoresButton, quitButton);
-        menu.setStyle("-fx-alignment: center; -fx-background-color: black;");
+        // Layout
+        VBox menu = new VBox();
+        menu.getStyleClass().addAll("center-aligned", "scene-background");
+        menu.getChildren().addAll(title, selectionButton, battlepassButton, highscoresButton, quitButton);
 
-        Scene scene = new Scene(menu, 768, 576*2);
+        // Scene
+        Scene scene = new Scene(menu, 768, 576 * 2);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); //import css class
 
-        //JavaFX setup
         primaryStage.setScene(scene);
-        primaryStage.show();
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
-        primaryStage.setAlwaysOnTop(true);
+        primaryStage.show();
     }
-
-
-
 
     public static void main(String[] args) {
         launch(args);
