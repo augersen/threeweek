@@ -5,9 +5,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -30,13 +31,27 @@ public class BattlepassMenu extends Application {
         // Awards
         HBox awardsRow = new HBox(20);
         awardsRow.setPadding(new Insets(20));
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 2; i++) {
             VBox award = new VBox(10); // Spacing between rectangle and text
-            Rectangle awardBox = new Rectangle(100, 100);
-            awardBox.getStyleClass().add("award-box"); // Assign the CSS class
+
+            Image awardImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/images/award" + i + ".png"))); // image folder
+            ImageView awardImageView = new ImageView(awardImage);
+            awardImageView.setFitWidth(100); // image size
+            awardImageView.setFitHeight(100);
+            awardImageView.setPreserveRatio(true);
+
+            // Award text
             Text awardText = new Text("Award " + i);
             awardText.getStyleClass().add("content-text");
-            award.getChildren().addAll(awardBox, awardText);
+
+            //click event to the award
+            int finalI = i;
+            award.setOnMouseClicked(e -> {
+                //logic for each award click here
+                System.out.println("clicked award: " + finalI);
+            });
+
+            award.getChildren().addAll(awardImageView, awardText);
             award.getStyleClass().add("center-aligned");
             awardsRow.getChildren().add(award);
         }
@@ -45,6 +60,8 @@ public class BattlepassMenu extends Application {
         // ScrollPane
         ScrollPane scrollPane = new ScrollPane(awardsRow);
         scrollPane.getStyleClass().add("scrollpane-background");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // Enable horizontal scrolling
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Disable vertical scrolling
 
         // Back Button
         Button backButton = new Button("Back to Menu");

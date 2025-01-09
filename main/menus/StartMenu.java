@@ -57,7 +57,7 @@ public class StartMenu extends Application {
         });
 
         //battlepass
-        Button battlepassButton = new Button("Battle Pass");
+        Button battlepassButton = new Button("Battlepass");
         battlepassButton.getStyleClass().add("battlepass-button");
         battlepassButton.setOnAction(e -> {
             try {
