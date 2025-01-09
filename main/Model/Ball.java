@@ -81,7 +81,7 @@ public class Ball extends Entity {
 
         if(y < player.getY() + player.getSizeY() + size && y > player.getY() - size &&
          x < player.getX() + player.getSizeX() + size && x > player.getX() - size){
-            this.vectorY *= -1;
+            this.collision(player.getX(), player.getY(), player.getSizeX(), player.getSizeY());
          }
 
          for(Brick[] brickList : bricks){
@@ -96,6 +96,7 @@ public class Ball extends Entity {
          return score;
     }
 
+    //For bricks
     public int collision(int entityX, int entityY, int entitySizeX, int entitySizeY, Brick brick){
         int action = 0;
         int size = this.radius / 2;
@@ -131,5 +132,40 @@ public class Ball extends Entity {
 
         return score;
 
+    }
+
+    //For player entity
+    public void collision(int entityX, int entityY, int entitySizeX, int entitySizeY){
+        int action = 0;
+        int size = this.radius / 2;
+
+
+        int[] ballPos1 = new int[]{this.getX() + this.radius/2, this.getY(),1};
+        int[] ballPos2 = new int[]{this.getX(), this.getY() + this.radius/2,2};
+        int[] ballPos3 = new int[]{this.getX() + this.radius/2, this.getY()+this.radius/2,3};
+        int[] ballPos4 = new int[]{this.getX()+this.radius/2, this.getY()+this.radius,4};
+
+        int[][] ballPositions = new int[][]{ballPos1, ballPos2, ballPos3,ballPos4};
+
+
+        for(int[] pos : ballPositions){
+            if(pos[1] < entityY + entitySizeY + size && pos[1] > entityY - size &&
+                    pos[0] < entityX + entitySizeX + size && pos[0] > entityX - size){
+                action = pos[2];
+            }
+        }
+
+        switch(action){
+            case 2 -> this.vectorX = Math.abs(this.vectorX);
+            case 3 -> this.vectorX = -1 * Math.abs(this.vectorX);
+            case 1 -> this.vectorY = Math.abs(this.vectorY);
+        }
+
+        if(action == 4){
+            int midpoint = entityX + entitySizeX/2;
+            System.out.println(midpoint + " " + this.getX());
+            this.vectorX = (midpoint-this.getX()) / midpoint * 16;
+            this.vectorY = -1 * (16 - Math.abs(this.vectorX));
+        }
     }
 }

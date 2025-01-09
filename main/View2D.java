@@ -108,7 +108,7 @@ public class View2D extends JPanel implements Runnable{
                 player.setX(player.getX()+player.getSpeed());
             }
         }
-
+        player.collision(screenWidth);
         score += ball.update(screenWidth, screenHeight, player, model.bricks);
     }
 
