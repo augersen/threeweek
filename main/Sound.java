@@ -7,8 +7,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class Sound {
-
+    // Clip is used for opening audio files
     Clip clip;
+    // URL is used as an array for storing file paths for our sound files
     URL soundURL[] = new URL[10];
 
     public Sound() {
