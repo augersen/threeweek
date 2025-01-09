@@ -17,8 +17,8 @@ public class View2D extends JPanel implements Runnable{
     // Gets resolution of screen
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
-    final int screenWidth = (int)(size.getWidth() / 2.5); 
-    final int screenHeight = (int)size.getHeight(); 
+    final int screenWidth = (int) (size.getWidth() / 2.5 - 7); 
+    final int screenHeight = (int) size.getHeight(); 
 
     int FPS = 60;
 
