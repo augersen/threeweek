@@ -3,66 +3,67 @@ package main.menus;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Main;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class SelectionMenu extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SelectionMenu.class.getName());
 
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("Breakout");
 
-        //Breakout title
+        // Title
         Text title = new Text("Select your modifiers!");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        title.setFill(new LinearGradient(
-                0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.RED),
-                new Stop(0.5, Color.PINK),
-                new Stop(1, Color.RED)
-        ));
-        //Start button
+        title.getStyleClass().addAll("title-text", "centered-text");
+
+        // Start Button
         Button startButton = new Button("Start Game");
+        startButton.getStyleClass().add("start-button");
         startButton.setOnAction(e -> startGame(primaryStage));
-        startButton.setStyle("-fx-font-size: 20; -fx-background-color: GREEN;");
+
+        // Checkboxes
+        VBox checkboxRow = new VBox(20);
+        checkboxRow.getStyleClass().add("center-aligned");
+        for (int i = 1; i <= 6; i++) {
+            CheckBox checkBox = new CheckBox("Modifier: " + i);
+            checkBox.getStyleClass().add("check-box");
+            checkboxRow.getChildren().add(checkBox);
+        }
+
 
         // Back Button
         Button backButton = new Button("Back to Menu");
+        backButton.getStyleClass().add("default-button");
         backButton.setOnAction(e -> {
-            StartMenu mainMenu = new StartMenu();
             try {
+                StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);
             } catch (Exception ex) {
                 LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
             }
+
         });
-        backButton.setStyle("-fx-font-size: 16; -fx-background-color: DARKGRAY;");
 
-        //Layout
-        VBox menu = new VBox(20);
-        menu.getChildren().addAll(title, startButton, backButton);
-        menu.setStyle("-fx-alignment: center; -fx-background-color: black;");
+        // Layout
+        VBox layout = new VBox(20);
+        layout.getChildren().addAll(title, startButton, checkboxRow, backButton);
+        layout.getStyleClass().addAll("center-aligned", "scene-background");
 
-        Scene scene = new Scene(menu, 768, 576*2);
+        // Scene
+        Scene scene = new Scene(layout, 768, 576 * 2);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); //import css class
 
         primaryStage.setScene(scene);
         primaryStage.show();
-        primaryStage.setResizable(false);
-        primaryStage.centerOnScreen();
-        primaryStage.setAlwaysOnTop(true);
     }
 
     private void startGame(Stage primaryStage) {
@@ -73,5 +74,4 @@ public class SelectionMenu extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

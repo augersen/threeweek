@@ -7,22 +7,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class BattlepassMenu extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BattlepassMenu.class.getName());
 
     @Override
     public void start(Stage primaryStage) {
@@ -30,58 +25,49 @@ public class BattlepassMenu extends Application {
 
         // Title
         Text title = new Text("Battlepass");
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        title.setFill(new LinearGradient(
-                0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
-                new Stop(0, Color.RED),
-                new Stop(0.5, Color.ORANGE),
-                new Stop(1, Color.YELLOW)
-        ));
+        title.getStyleClass().addAll("title-text", "centered-text");
 
-        // Create a scrollable row for awards
-        HBox awardsRow = new HBox(20); // Increased spacing for better readability
+        // Awards
+        HBox awardsRow = new HBox(20);
         awardsRow.setPadding(new Insets(20));
-
-        // Generate 20 awards as rectangles
         for (int i = 1; i <= 20; i++) {
             VBox award = new VBox(10); // Spacing between rectangle and text
-            Rectangle awardBox = new Rectangle(100, 100, Color.LIGHTBLUE);
+            Rectangle awardBox = new Rectangle(100, 100);
+            awardBox.getStyleClass().add("award-box"); // Assign the CSS class
             Text awardText = new Text("Award " + i);
-            awardText.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
-            awardText.setFill(Color.WHITE); // text color
+            awardText.getStyleClass().add("content-text");
             award.getChildren().addAll(awardBox, awardText);
-            award.setStyle("-fx-alignment: center;");
+            award.getStyleClass().add("center-aligned");
             awardsRow.getChildren().add(award);
         }
 
-        // Wrap the awards row in a ScrollPane
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(awardsRow);
-        scrollPane.setFitToHeight(true); // Fit the height of the ScrollPane
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setStyle("-fx-background: #000000;");
 
-        // Back button
+        // ScrollPane
+        ScrollPane scrollPane = new ScrollPane(awardsRow);
+        scrollPane.getStyleClass().add("scrollpane-background");
+
+        // Back Button
         Button backButton = new Button("Back to Menu");
+        backButton.getStyleClass().add("default-button");
         backButton.setOnAction(e -> {
-            StartMenu mainMenu = new StartMenu();
             try {
+                StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);
             } catch (Exception ex) {
                 LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
-
             }
+
         });
-        backButton.setStyle("-fx-font-size: 16; -fx-background-color: DARKGRAY;");
 
         // Layout
         VBox layout = new VBox(20);
-        layout.setPadding(new Insets(20));
         layout.getChildren().addAll(title, scrollPane, backButton);
-        layout.setStyle("-fx-alignment: center; -fx-background-color: black;");
+        layout.getStyleClass().addAll("center-aligned", "scene-background");
 
+        // Scene
         Scene scene = new Scene(layout, 768, 576 * 2);
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); //import css class
+
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -90,4 +76,3 @@ public class BattlepassMenu extends Application {
         launch(args);
     }
 }
-
