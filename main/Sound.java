@@ -43,6 +43,7 @@ public class Sound {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
+    // Stop
     public void stop() {
 
         clip.stop();
