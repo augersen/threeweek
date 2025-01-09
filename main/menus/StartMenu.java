@@ -17,8 +17,6 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 
-import main.Main;
-
 public class StartMenu extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
@@ -37,13 +35,20 @@ public class StartMenu extends Application {
                 new Stop(1, Color.YELLOW)
         ));
 
+        //SelectionMenu button
+        Button selectionButton = new Button("Play!");
+        selectionButton.setOnAction(e -> {
+            SelectionMenu selectionMenu = new SelectionMenu();
+            try {
+                selectionMenu.start(primaryStage);
+            } catch (Exception ex) {
+                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
 
-        //Start button
-        Button startButton = new Button("Start Game");
-        startButton.setOnAction(e -> startGame(primaryStage));
-        startButton.setStyle("-fx-font-size: 20; -fx-background-color: GREEN;");
+            }
+        });
+        selectionButton.setStyle("-fx-font-size: 20; -fx-background-color: YELLOW;");
 
-        //Start button
+        //Battlepass button
         Button battlepassButton = new Button("Battle Pass");
         battlepassButton.setOnAction(e -> {
             BattlepassMenu battlepassMenu = new BattlepassMenu();
@@ -76,11 +81,12 @@ public class StartMenu extends Application {
 
         //Layout
         VBox menu = new VBox(20);
-        menu.getChildren().addAll(title, startButton,battlepassButton, highscoresButton, quitButton);
+        menu.getChildren().addAll(title,selectionButton, battlepassButton, highscoresButton, quitButton);
         menu.setStyle("-fx-alignment: center; -fx-background-color: black;");
 
         Scene scene = new Scene(menu, 768, 576*2);
 
+        //JavaFX setup
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
@@ -88,10 +94,7 @@ public class StartMenu extends Application {
         primaryStage.setAlwaysOnTop(true);
     }
 
-    private void startGame(Stage primaryStage) {
-        Main.startGame();
-        primaryStage.close();
-    }
+
 
 
     public static void main(String[] args) {

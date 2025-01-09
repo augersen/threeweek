@@ -10,7 +10,7 @@ public class Main {
         //startGame();
 
         //Startmenu
-        Application.launch(StartMenu.class, args);
+       Application.launch(StartMenu.class, args);
     }
 
     public static void startGame(){ //Will later become main, this is temporary for testing purposes.
