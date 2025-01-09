@@ -7,6 +7,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
+
+import javafx.util.Duration;
+
 import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -22,6 +27,21 @@ public class StartMenu extends Application {
         // Title
         Text title = new Text("Breakout");
         title.getStyleClass().addAll("title-text", "centered-text");
+
+        //attempt at animation
+        // Scaling animation
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1.5), title);
+        scaleTransition.setFromX(1);
+        scaleTransition.setFromY(1);
+        scaleTransition.setToX(1.2);
+        scaleTransition.setToY(1.2);
+        scaleTransition.setAutoReverse(true);
+        scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
+
+        // Combine animation
+        SequentialTransition animation = new SequentialTransition(scaleTransition);
+        animation.play();
+        //animations over
 
         //select modifiers
         Button selectionButton = new Button("Play!");
