@@ -1,13 +1,16 @@
 package main.Model;
 
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 
 public class Model {
     public Brick[][] bricks;
     private int score;
     private int height = 8;
     private int length = 14;
-    private int sizeX = 50;
+    private Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+    private int sizeX = (int) (size.getWidth() / 2.5 / 14 - 5);
     private int sizeY = 25;
 
     public Model(){
