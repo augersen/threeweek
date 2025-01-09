@@ -49,7 +49,7 @@ public class HighscoresMenu extends Application {
         highscoreColumn.setStyle("-fx-alignment: center;");
 
         // Generate 20 Highscore Entries as Text
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 3; i++) {
             Text highscoreText = new Text(i + ". Player" + i + " - " + (1000 - i * 10) + " Points");
             highscoreText.setFont(Font.font("Arial", FontWeight.NORMAL, 20));
             highscoreText.setFill(new LinearGradient(

@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-
 public class BattlepassMenu extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
