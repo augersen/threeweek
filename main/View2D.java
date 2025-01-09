@@ -4,13 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.JPanel;
-
 import main.Model.Ball;
 import main.Model.Brick;
-import main.Model.Player;
 import main.Model.Model;
+import main.Model.Player;
 
 public class View2D extends JPanel implements Runnable{
 
@@ -110,6 +108,7 @@ public class View2D extends JPanel implements Runnable{
     }
 
     //Standard method for drawing in JPanel
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;

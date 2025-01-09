@@ -25,7 +25,7 @@ public class Brick extends Entity {
         this.score = score;
     }
 
-    public void destroyBrick(){
+    public void destroy(){
         this.setPosition(-50,-50);
         this.setSizes(0,0);
         this.setColor(Color.black);
