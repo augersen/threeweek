@@ -3,6 +3,8 @@ package main.menus;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -39,6 +41,19 @@ public class SelectionMenu extends Application {
         startButton.setOnAction(e -> startGame(primaryStage));
         startButton.setStyle("-fx-font-size: 20; -fx-background-color: GREEN;");
 
+        VBox checkboxRow = new VBox(20); // Increased spacing for better readability
+
+        // Checkboxes
+        for (int i = 1; i <= 6; i++) {
+            HBox checkBoxes = new HBox(10); // Spacing between rectangle and text
+            CheckBox checkBox = new CheckBox("Modifer: " + i);
+            checkBoxes.getChildren().addAll(checkBox);
+            checkBoxes.setStyle("-fx-font-size: 16;-fx-alignment: center;");
+            checkboxRow.getChildren().add(checkBoxes);
+
+        }
+
+
         // Back Button
         Button backButton = new Button("Back to Menu");
         backButton.setOnAction(e -> {
@@ -53,7 +68,7 @@ public class SelectionMenu extends Application {
 
         //Layout
         VBox menu = new VBox(20);
-        menu.getChildren().addAll(title, startButton, backButton);
+        menu.getChildren().addAll(title, startButton,checkboxRow, backButton);
         menu.setStyle("-fx-alignment: center; -fx-background-color: black;");
 
         Scene scene = new Scene(menu, 768, 576*2);

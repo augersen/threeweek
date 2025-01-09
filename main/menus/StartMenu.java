@@ -35,8 +35,8 @@ public class StartMenu extends Application {
                 new Stop(1, Color.YELLOW)
         ));
 
-        //Battlepass button
-        Button selectionButton = new Button("Select modifiers");
+        //SelectionMenu button
+        Button selectionButton = new Button("Play!");
         selectionButton.setOnAction(e -> {
             SelectionMenu selectionMenu = new SelectionMenu();
             try {
@@ -86,6 +86,7 @@ public class StartMenu extends Application {
 
         Scene scene = new Scene(menu, 768, 576*2);
 
+        //JavaFX setup
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
