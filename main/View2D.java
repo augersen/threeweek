@@ -12,13 +12,13 @@ import main.Model.Brick;
 import main.Model.Model;
 import main.Model.Player;
 
-public class View2D extends JPanel implements Runnable{
+public class View2D extends JPanel implements Runnable {
 
     // Gets resolution of screen
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
 
-    final int screenWidth = (int)(size.getWidth() / 2.5); 
-    final int screenHeight = (int)size.getHeight(); 
+    final int screenWidth = (int) (size.getWidth() / 2.5);
+    final int screenHeight = (int) size.getHeight();
 
     int FPS = 60;
 
@@ -30,9 +30,10 @@ public class View2D extends JPanel implements Runnable{
     Ball ball = new Ball();
     Model model = new Model();
     int score = 0;
+    Sound sound = new Sound();
 
     /* Sets up the initial properties of the game panel */
-    public View2D(){
+    public View2D() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -40,34 +41,35 @@ public class View2D extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
-        //setup player
-        player.setSizes(100,25);
-        player.setPosition(screenWidth/2 - player.getSizeX()/2,(int)(screenHeight * 0.75));
+        // setup player
+        player.setSizes(100, 25);
+        player.setPosition(screenWidth / 2 - player.getSizeX() / 2, (int) (screenHeight * 0.75));
         player.setColor(Color.orange);
         player.setSpeed(6);
 
-        //setup ball
+        // setup ball
         ball.setSizes(25);
-        ball.setPosition(screenWidth/2 - ball.getRadius()/2, (int)(screenHeight * 0.75)-player.getSizeY());
+        ball.setPosition(screenWidth / 2 - ball.getRadius() / 2, (int) (screenHeight * 0.75) - player.getSizeY());
         ball.setColor(Color.pink);
         ball.setSpeed(8);
 
     }
 
     /* Starts game thread, making the game actually run */
-    public void startGameThread(){
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+        sound.playMusic(0);
     }
 
-    @Override 
+    @Override
     /* The game loop */
     public void run() {
 
         double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
-        
-        while(gameThread != null){
+
+        while (gameThread != null) {
             // update: update information such as character positions
             update();
 
@@ -76,58 +78,58 @@ public class View2D extends JPanel implements Runnable{
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
-                
-                if(remainingTime < 0){
+
+                if (remainingTime < 0) {
                     remainingTime = 0;
                 }
 
-                Thread.sleep((long)remainingTime / 1000000);
+                Thread.sleep((long) remainingTime / 1000000);
 
                 nextDrawTime = System.nanoTime() + drawInterval;
 
             } catch (InterruptedException e) {
-                
+
                 e.printStackTrace();
             }
         }
     }
 
     public void update() {
-        if(keyH.aPressed){
-            if(keyH.shiftPressed){
-                player.setX(player.getX()-player.getSpeed()*2);
+        if (keyH.aPressed) {
+            if (keyH.shiftPressed) {
+                player.setX(player.getX() - player.getSpeed() * 2);
             } else {
-                player.setX(player.getX()-player.getSpeed());
+                player.setX(player.getX() - player.getSpeed());
             }
-            
+
         }
-        if(keyH.dPressed){
-            if(keyH.shiftPressed){
-                player.setX(player.getX()+player.getSpeed()*2);
+        if (keyH.dPressed) {
+            if (keyH.shiftPressed) {
+                player.setX(player.getX() + player.getSpeed() * 2);
             } else {
-                player.setX(player.getX()+player.getSpeed());
+                player.setX(player.getX() + player.getSpeed());
             }
         }
 
-        score += ball.update(screenWidth, screenHeight, player, model.bricks);
+        score += ball.update(screenWidth, screenHeight, player, model.bricks, sound);
     }
 
-    //Standard method for drawing in JPanel
+    // Standard method for drawing in JPanel
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
         g2.setColor(player.getColor());
-        g2.fillRect(player.getX(),player.getY(),player.getSizeX(),player.getSizeY());
+        g2.fillRect(player.getX(), player.getY(), player.getSizeX(), player.getSizeY());
 
         g2.setColor(ball.getColor());
-        g2.fillOval(ball.getX(),ball.getY(),ball.getRadius(),ball.getRadius());
-        
-        for(Brick[] brickList : model.bricks){
-            for(Brick brick : brickList){
+        g2.fillOval(ball.getX(), ball.getY(), ball.getRadius(), ball.getRadius());
+
+        for (Brick[] brickList : model.bricks) {
+            for (Brick brick : brickList) {
                 g2.setColor(brick.getColor());
-                g2.fillRect(brick.getX(),brick.getY(),brick.getSizeX(),brick.getSizeY());
+                g2.fillRect(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY());
             }
         }
 

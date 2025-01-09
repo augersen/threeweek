@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-
 public class StartMenu extends Application {
 
     private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
@@ -25,17 +24,16 @@ public class StartMenu extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Breakout");
 
-        //Breakout title
+        // Breakout title
         Text title = new Text("Breakout");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 50));
         title.setFill(new LinearGradient(
                 0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.RED),
                 new Stop(0.5, Color.ORANGE),
-                new Stop(1, Color.YELLOW)
-        ));
+                new Stop(1, Color.YELLOW)));
 
-        //Battlepass button
+        // Battlepass button
         Button selectionButton = new Button("Select modifiers");
         selectionButton.setOnAction(e -> {
             SelectionMenu selectionMenu = new SelectionMenu();
@@ -48,7 +46,7 @@ public class StartMenu extends Application {
         });
         selectionButton.setStyle("-fx-font-size: 20; -fx-background-color: YELLOW;");
 
-        //Battlepass button
+        // Battlepass button
         Button battlepassButton = new Button("Battle Pass");
         battlepassButton.setOnAction(e -> {
             BattlepassMenu battlepassMenu = new BattlepassMenu();
@@ -61,7 +59,7 @@ public class StartMenu extends Application {
         });
         battlepassButton.setStyle("-fx-font-size: 20; -fx-background-color: YELLOW;");
 
-        //Highscores
+        // Highscores
         Button highscoresButton = new Button("Highscores");
         highscoresButton.setOnAction(e -> {
             HighscoresMenu highscoresMenu = new HighscoresMenu();
@@ -74,17 +72,17 @@ public class StartMenu extends Application {
         });
         highscoresButton.setStyle("-fx-font-size: 20; -fx-background-color: LIGHTBLUE;");
 
-        //Quit Button
+        // Quit Button
         Button quitButton = new Button("Quit Game");
         quitButton.setOnAction(e -> System.exit(0));
         quitButton.setStyle("-fx-font-size: 20; -fx-background-color: RED;");
 
-        //Layout
+        // Layout
         VBox menu = new VBox(20);
-        menu.getChildren().addAll(title,selectionButton, battlepassButton, highscoresButton, quitButton);
+        menu.getChildren().addAll(title, selectionButton, battlepassButton, highscoresButton, quitButton);
         menu.setStyle("-fx-alignment: center; -fx-background-color: black;");
 
-        Scene scene = new Scene(menu, 768, 576*2);
+        Scene scene = new Scene(menu, 768, 576 * 2);
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -92,9 +90,6 @@ public class StartMenu extends Application {
         primaryStage.centerOnScreen();
         primaryStage.setAlwaysOnTop(true);
     }
-
-
-
 
     public static void main(String[] args) {
         launch(args);
