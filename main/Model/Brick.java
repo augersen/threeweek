@@ -11,6 +11,7 @@ public class Brick extends Entity {
     }
 
     //Returns score as a string
+    @Override
     public String toString(){
         return this.score + super.toString();
     }
