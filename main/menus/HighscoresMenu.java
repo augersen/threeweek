@@ -35,7 +35,7 @@ public class HighscoresMenu extends Application {
         highscoreColumn.setPadding(new Insets(20));
         highscoreColumn.getStyleClass().add("center-aligned");
 
-        // Highscore Entries as Text
+        // Highscore Text
         for (int i = 1; i <= 3; i++) {
             Text highscoreText = new Text(i + ". Player" + i + " - " + (1000 - i * 10) + " Points");
             highscoreText.getStyleClass().add("highscore-text");
@@ -44,7 +44,7 @@ public class HighscoresMenu extends Application {
             highscoreColumn.getChildren().add(highscoreText);
         }
 
-        // ScrollPane for Highscore Column
+        // ScrollPane
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(highscoreColumn);
         scrollPane.setFitToWidth(true); // Fit width of ScrollPane
