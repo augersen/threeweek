@@ -86,7 +86,10 @@ public class Ball extends Entity {
 
          for(Brick[] brickList : bricks){
             for(Brick brick : brickList){
-                score += this.collision(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY(), brick);
+                if(y < brick.getY() + brick.getSizeY() + size && y > brick.getY() - size && 
+                x < brick.getX() + brick.getSizeX() + size && x > brick.getX() - size){
+                    score += this.collision(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY(), brick);
+                }
             }
          }
         
@@ -109,7 +112,7 @@ public class Ball extends Entity {
         for(int[] pos : ballPositions){
             if(pos[1] < entityY + entitySizeY + size && pos[1] > entityY - size &&
                     pos[0] < entityX + entitySizeX + size && pos[0] > entityX - size){
-                        action = pos[3];
+                        action = pos[2];
                         break outerloop;
                     }
         }
@@ -123,7 +126,7 @@ public class Ball extends Entity {
 
         if(action != 0){
             score = brick.getScore();
-            brick.destroy();
+            brick.destroyBrick();
         }
 
         return score;

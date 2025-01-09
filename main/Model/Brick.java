@@ -11,6 +11,7 @@ public class Brick extends Entity {
     }
 
     //Returns score as a string
+    @Override
     public String toString(){
         return this.score + super.toString();
     }
@@ -25,7 +26,7 @@ public class Brick extends Entity {
         this.score = score;
     }
 
-    public void destroy(){
+    public void destroyBrick(){
         this.setPosition(-50,-50);
         this.setSizes(0,0);
         this.setColor(Color.black);
