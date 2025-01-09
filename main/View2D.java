@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
@@ -14,8 +15,11 @@ import main.Model.Model;
 
 public class View2D extends JPanel implements Runnable{
 
-    final int screenWidth = 768; //768 pixels
-    final int screenHeight = 576*2; //576 pixels
+    // Gets resolution of screen
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+
+    final int screenWidth = (int)(size.getWidth() / 2.5); 
+    final int screenHeight = (int)size.getHeight(); 
 
     int FPS = 60;
 
