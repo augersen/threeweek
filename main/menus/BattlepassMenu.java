@@ -28,7 +28,12 @@ public class BattlepassMenu extends Application {
         Text title = new Text("Battlepass");
         title.getStyleClass().addAll("title-text", "centered-text");
 
-        // Awards
+        //Awards
+        //award names
+        String[] rewardNames = {
+                "Musk", "Lion"
+        };
+
         HBox awardsRow = new HBox(20);
         awardsRow.setPadding(new Insets(20));
         for (int i = 1; i <= 2; i++) {
@@ -40,15 +45,15 @@ public class BattlepassMenu extends Application {
             awardImageView.setFitHeight(100);
             awardImageView.setPreserveRatio(true);
 
-            // Award text
-            Text awardText = new Text("Award " + i);
+            // award text
+            Text awardText = new Text(rewardNames[i - 1]); // name from rewardNames
             awardText.getStyleClass().add("content-text");
 
             //click event to the award
             int finalI = i;
             award.setOnMouseClicked(e -> {
                 //logic for each award click here
-                System.out.println("clicked award: " + finalI);
+                System.out.println("clicked award: " + finalI + ", name: " + rewardNames[finalI - 1]);
             });
 
             award.getChildren().addAll(awardImageView, awardText);
