@@ -84,6 +84,7 @@ public class StartMenu extends Application {
 
         Scene scene = new Scene(menu, 768, 576 * 2);
 
+        // JavaFX setup
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
