@@ -76,8 +76,14 @@
 
 /* Award box styling */
 .award-box {
-    -fx-fill: lightblue; /* Change this to your desired background color */
-    -fx-stroke: white;   /* Optional: Add a border */
-    -fx-stroke-width: 2; /* Optional: Set the border thickness */
+    -fx-fill: lightblue;
+    -fx-stroke: white;
+    -fx-stroke-width: 2;
 }
 
+/*Checkbox text styling*/
+.check-box .text {
+    -fx-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+}

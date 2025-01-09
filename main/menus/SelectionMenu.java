@@ -35,9 +35,10 @@ public class SelectionMenu extends Application {
         checkboxRow.getStyleClass().add("center-aligned");
         for (int i = 1; i <= 6; i++) {
             CheckBox checkBox = new CheckBox("Modifier: " + i);
-            checkBox.getStyleClass().add("content-text");
+            checkBox.getStyleClass().add("check-box");
             checkboxRow.getChildren().add(checkBox);
         }
+
 
         // Back Button
         Button backButton = new Button("Back to Menu");
