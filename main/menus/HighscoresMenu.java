@@ -10,12 +10,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Objects;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+
 
 public class HighscoresMenu extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(HighscoresMenu.class.getName());
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -59,7 +61,7 @@ public class HighscoresMenu extends Application {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
+                System.out.println("An error occurred while returning to the StartMenu");
             }
 
         });
@@ -78,9 +80,5 @@ public class HighscoresMenu extends Application {
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
