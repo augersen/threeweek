@@ -49,8 +49,8 @@ public class BattlepassMenu extends Application {
 
         // Actions for each award
         Map<Integer, Runnable> rewardActions = new HashMap<>();
-        rewardActions.put(1, () -> unlockFeature1());
-        rewardActions.put(2, () -> unlockFeature2());
+        rewardActions.put(1, this::unlockFeature1);
+        rewardActions.put(2, this::unlockFeature2);
 
         // Awards row
         HBox awardsRow = new HBox(20);
