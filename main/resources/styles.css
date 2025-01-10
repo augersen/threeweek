@@ -86,3 +86,29 @@
     -fx-font-size: 16px;
     -fx-font-family: "Arial";
 }
+
+/* StackPane background and border removal */
+.stackpane-root {
+    -fx-background-color: transparent; /* Ensure the StackPane background is transparent */
+    -fx-padding: 0; /* Remove any default padding */
+    -fx-border-color: transparent; /* Remove any borders */
+}
+
+
+/* Pop-up text styling */
+.popup-text {
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-fill: white;
+    -fx-text-alignment: center;
+}
+
+/* Pop-up background styling */
+.popup-background {
+    -fx-background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    -fx-padding: 20px;
+    -fx-border-radius: 10; /* Rounded corners */
+    -fx-background-radius: 10; /* Match rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0); /* Optional: Shadow effect */
+}
+

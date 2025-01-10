@@ -1,24 +1,24 @@
 package main.menus;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import javafx.animation.ScaleTransition;
-import javafx.animation.SequentialTransition;
-
 import javafx.util.Duration;
 
 import java.util.Objects;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+
 
 public class StartMenu extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(StartMenu.class.getName());
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -38,7 +38,6 @@ public class StartMenu extends Application {
         scaleTransition.setAutoReverse(true);
         scaleTransition.setCycleCount(ScaleTransition.INDEFINITE);
 
-        // Combine animation
         SequentialTransition animation = new SequentialTransition(scaleTransition);
         animation.play();
         //animations over
@@ -51,7 +50,7 @@ public class StartMenu extends Application {
                 SelectionMenu selectionMenu = new SelectionMenu();
                 selectionMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while opening SelectionMenu", ex);
+                System.out.println("An error occurred while opening SelectionMenu");
             }
 
         });
@@ -64,7 +63,7 @@ public class StartMenu extends Application {
                 BattlepassMenu battlepassMenu = new BattlepassMenu();
                 battlepassMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while opening BattlepassMenu", ex);
+                System.out.println("An error occurred while opening BattlepassMenu");
             }
 
         });
@@ -77,7 +76,7 @@ public class StartMenu extends Application {
                 HighscoresMenu highscoresMenu = new HighscoresMenu();
                 highscoresMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while opening HighscoresMenu", ex);
+                System.out.println("An error occurred while opening HighscoresMenu");
             }
 
         });
@@ -100,9 +99,5 @@ public class StartMenu extends Application {
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

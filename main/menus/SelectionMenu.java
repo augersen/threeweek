@@ -10,12 +10,14 @@ import javafx.stage.Stage;
 import main.Main;
 
 import java.util.Objects;
-import java.util.logging.Logger;
-import java.util.logging.Level;
+
 
 public class SelectionMenu extends Application {
 
-    private static final Logger LOGGER = Logger.getLogger(SelectionMenu.class.getName());
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -48,7 +50,7 @@ public class SelectionMenu extends Application {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);
             } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, "An error occurred while returning to the StartMenu", ex);
+                System.out.println("An error occurred while returning to the StartMenu");
             }
 
         });
@@ -69,9 +71,5 @@ public class SelectionMenu extends Application {
     private void startGame(Stage primaryStage) {
         Main.startGame();
         primaryStage.close();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
