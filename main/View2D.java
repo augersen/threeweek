@@ -9,9 +9,16 @@ import javax.swing.JPanel;
 import main.Model.Ball;
 import main.Model.Brick;
 import main.Model.Model;
-import main.Model.Player;
+import main.Model.Platform;
+import main.Model.Sound;
 
 public class View2D extends JPanel implements Runnable{
+
+    // Gets resolution of screen
+    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+
+    final int screenWidth = (int) (size.getWidth() / 2.5 - 7); 
+    final int screenHeight = (int) size.getHeight(); 
 
     int FPS = 60;
 
@@ -19,29 +26,30 @@ public class View2D extends JPanel implements Runnable{
     Thread gameThread;
 
     // Initiate Entities
-    Player player = new Player();
+    Platform platform = new Platform();
     Ball ball = new Ball();
     Model model = new Model();
+    Sound sound = new Sound();
     int score = 0;
 
     /* Sets up the initial properties of the game panel */
     public View2D(){
 
-        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
-        //setup player
-        player.setSizes(100,25);
-        player.setPosition(Config.SCREEN_WIDTH/2 - player.getSizeX()/2,(int)(Config.SCREEN_HEIGHT * 0.75));
-        player.setColor(Color.orange);
-        player.setSpeed(6);
+        //setup platform
+        platform.setSizes(100,25);
+        platform.setPosition(screenWidth/2 - platform.getSizeX()/2,(int)(screenHeight * 0.75));
+        platform.setColor(Color.orange);
+        platform.setSpeed(6);
 
         //setup ball
         ball.setSizes(25);
-        ball.setPosition(Config.SCREEN_WIDTH/2 - ball.getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)-player.getSizeY());
+        ball.setPosition(screenWidth/2 - ball.getRadius()/2, (int)(screenHeight * 0.75)- platform.getSizeY());
         ball.setColor(Color.pink);
         ball.setSpeed(8);
 
@@ -88,21 +96,21 @@ public class View2D extends JPanel implements Runnable{
     public void update() {
         if(keyH.aPressed){
             if(keyH.shiftPressed){
-                player.setX(player.getX()-player.getSpeed()*2);
+                platform.setX(platform.getX()- platform.getSpeed()*2);
             } else {
-                player.setX(player.getX()-player.getSpeed());
+                platform.setX(platform.getX()- platform.getSpeed());
             }
             
         }
         if(keyH.dPressed){
             if(keyH.shiftPressed){
-                player.setX(player.getX()+player.getSpeed()*2);
+                platform.setX(platform.getX()+ platform.getSpeed()*2);
             } else {
-                player.setX(player.getX()+player.getSpeed());
+                platform.setX(platform.getX()+ platform.getSpeed());
             }
         }
-        player.collision(Config.SCREEN_WIDTH);
-        score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, player, model.bricks);
+        platform.collision(screenWidth);
+        score += ball.update(screenWidth, screenHeight, platform, model.bricks, sound);
     }
 
     //Standard method for drawing in JPanel
@@ -111,8 +119,12 @@ public class View2D extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        g2.setColor(player.getColor());
-        g2.fillRect(player.getX(),player.getY(),player.getSizeX(),player.getSizeY());
+        g2.setColor(platform.getColor());
+        g2.fillRect(platform.getX(), platform.getY(), platform.getSizeX(), platform.getSizeY());
+
+        //MAKE PRETTY - TEXT SHOWING SCORE ON BALL
+        g2.setColor(Color.black);
+        g2.drawString(this.score + "", platform.getX(),platform.getY()+platform.getSizeY()/2);
 
         g2.setColor(ball.getColor());
         g2.fillOval(ball.getX(),ball.getY(),ball.getRadius(),ball.getRadius());
@@ -125,5 +137,10 @@ public class View2D extends JPanel implements Runnable{
         }
 
         g2.dispose();
+    }
+
+    //method for getting score from game.
+    public int getScore(){
+        return this.score;
     }
 }

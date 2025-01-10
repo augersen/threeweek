@@ -3,7 +3,7 @@ package main.Model;
 import java.awt.Color;
 
 /**
- * Entity class is used as a standard for the entities in the game, Ball, Brick and Player. It is made to be changed with the Controller
+ * Entity class is used as a standard for the entities in the game, Ball, Brick and Platform. It is made to be changed with the Controller
  * and shown in View. Changes are made in the Model class.
  */
 public class Entity {

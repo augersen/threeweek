@@ -40,7 +40,7 @@ public class HighscoresMenu extends Application {
 
         // Highscore Text
         for (int i = 1; i <= 3; i++) {
-            Text highscoreText = new Text(i + ". Player" + i + " - " + (1000 - i * 10) + " Points");
+            Text highscoreText = new Text(i + ". Platform" + i + " - " + (1000 - i * 10) + " Points");
             highscoreText.getStyleClass().add("highscore-text");
 
             // Add each high score text to the column

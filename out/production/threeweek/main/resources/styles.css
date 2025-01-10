@@ -1,0 +1,114 @@
+
+/* Background colors */
+.scene-background {
+    -fx-background-color: black;
+}
+
+/* Text styling */
+.title-text {
+    -fx-font-size: 50px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 0%, red, orange, yellow);
+}
+
+.content-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial";
+    -fx-fill: white;
+}
+
+.highscore-text {
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial";
+    -fx-fill: linear-gradient(from 0% 0% to 100% 0%, gold, silver, palegreen);
+}
+
+/* Button styles */
+.default-button {
+    -fx-font-size: 16px;
+    -fx-background-color: darkgray;
+}
+
+.play-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #1ef61e;
+}
+
+.battlepass-button {
+    -fx-font-size: 20px;
+    -fx-background-color: yellow;
+}
+
+.highscore-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #1092d5;
+}
+
+.quit-button {
+    -fx-font-size: 20px;
+    -fx-background-color: red;
+}
+
+.start-button {
+    -fx-font-size: 20px;
+    -fx-background-color: #61fa61;
+}
+
+/* ScrollPane background */
+.scrollpane-background {
+    -fx-background: #000000;
+}
+
+/* Center text */
+.centered-text {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+/* VBox alignment */
+.center-aligned {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+}
+
+/* Award box styling */
+.award-box {
+    -fx-fill: lightblue;
+    -fx-stroke: white;
+    -fx-stroke-width: 2;
+}
+
+/*Checkbox text styling*/
+.check-box .text {
+    -fx-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+}
+
+/* StackPane background and border removal */
+.stackpane-root {
+    -fx-background-color: transparent; /* Ensure the StackPane background is transparent */
+    -fx-padding: 0; /* Remove any default padding */
+    -fx-border-color: transparent; /* Remove any borders */
+}
+
+
+/* Pop-up text styling */
+.popup-text {
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial";
+    -fx-fill: white;
+    -fx-text-alignment: center;
+}
+
+/* Pop-up background styling */
+.popup-background {
+    -fx-background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    -fx-padding: 20px;
+    -fx-border-radius: 10; /* Rounded corners */
+    -fx-background-radius: 10; /* Match rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0); /* Optional: Shadow effect */
+}
+
