@@ -16,6 +16,12 @@ public class Sound {
         soundURL[0] = getClass().getResource("/main/resources/sounds/retroBassEffectForLoop.wav");
         soundURL[1] = getClass().getResource("/main/resources/sounds/menuMusic.wav");
         soundURL[2] = getClass().getResource("/main/resources/sounds/droppingRocks5996.wav");
+        soundURL[3] = getClass().getResource("/main/resources/sounds/menuSelectSound.wav");
+        soundURL[4] = getClass().getResource("/main/resources/sounds/fanfare.wav");
+        soundURL[5] = getClass().getResource("/main/resources/sounds/fail.wav");
+
+
+
 
     }
 
