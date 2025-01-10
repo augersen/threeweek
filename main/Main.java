@@ -6,14 +6,13 @@ import main.menus.StartMenu;
 import javax.swing.JFrame;
 
 public class Main {
-    public static void main(String[] args){
-        //startGame();
-
-        //Startmenu
-       Application.launch(StartMenu.class, args);
+    public static void main(String[] args) {
+        // startGame();
+        // Startmenu
+        Application.launch(StartMenu.class, args);
     }
 
-    public static void startGame(){ //Will later become main, this is temporary for testing purposes.
+    public static void startGame() { // Will later become main, this is temporary for testing purposes.
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);

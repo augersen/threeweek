@@ -14,7 +14,9 @@ public class Sound {
     public Sound() {
 
         soundURL[0] = getClass().getResource("/main/resources/sounds/retroBassEffectForLoop.wav");
-        soundURL[1] = getClass().getResource("/main/resources/sounds/droppingRocks5996.wav");
+        soundURL[1] = getClass().getResource("/main/resources/sounds/menuMusic.wav");
+        soundURL[2] = getClass().getResource("/main/resources/sounds/droppingRocks5996.wav");
+
     }
 
     public void setFile(int i) {
