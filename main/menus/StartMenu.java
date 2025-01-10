@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.Config;
 
 import java.util.Objects;
 
@@ -92,7 +93,7 @@ public class StartMenu extends Application {
         menu.getChildren().addAll(title, selectionButton, battlepassButton, highscoresButton, quitButton);
 
         // Scene
-        Scene scene = new Scene(menu, 768, 576 * 2);
+        Scene scene = new Scene(menu, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); //import css class
 
         primaryStage.setScene(scene);

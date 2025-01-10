@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.Config;
 
 import java.util.Objects;
 
@@ -74,7 +75,7 @@ public class HighscoresMenu extends Application {
         layout.getStyleClass().addAll("scene-background", "center-aligned");
 
         // Scene and Stage Setup
-        Scene scene = new Scene(layout, 768, 576 * 2);
+        Scene scene = new Scene(layout, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); //import css class
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

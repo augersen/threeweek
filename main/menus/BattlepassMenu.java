@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import main.Config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -105,7 +106,7 @@ public class BattlepassMenu extends Application {
         root.getChildren().add(layout); // add the main layout to the root
 
         // Scene
-        Scene scene = new Scene(root, 768, 576 * 2);
+        Scene scene = new Scene(root, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); // Import CSS class
 
         primaryStage.setScene(scene);
