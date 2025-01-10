@@ -164,11 +164,9 @@ public class Ball extends Entity {
         //math for making ball bounce, makes no sense.
         if(action == 4){
             int midpoint = entityX + entitySizeX/2;
-            System.out.println(midpoint + " " + this.getX());
-            double newVectorX = ((double)midpoint - (double)this.getX()) / ((double)midpoint / 32.0);
-            System.out.println(newVectorX);
-            this.vectorX = -1 * (int)(((double)midpoint-(double)this.getX()) / (double)midpoint * 16.0);
-            this.vectorY = -1 * (16 - Math.abs(this.vectorX));
+            if(this.getX() < midpoint){this.vectorX = -1 * Math.abs(this.vectorX);}
+            else{this.vectorX = Math.abs(this.vectorX);}
+            this.vectorY = -1* Math.abs(this.vectorY);
         }
     }
 }
