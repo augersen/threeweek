@@ -1,9 +1,9 @@
 package main.Model;
 
-public class Player extends Entity {
+public class Platform extends Entity {
     private int speed;
 
-    public Player(){
+    public Platform(){
         super();
         this.speed = 0;
     }
@@ -11,6 +11,7 @@ public class Player extends Entity {
     public int getSpeed(){
         return this.speed;
     }
+
 
     //Sets speed
     public void setSpeed(int speed){

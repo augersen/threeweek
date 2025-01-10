@@ -10,7 +10,8 @@ import javax.swing.JPanel;
 import main.Model.Ball;
 import main.Model.Brick;
 import main.Model.Model;
-import main.Model.Player;
+import main.Model.Platform;
+import main.Model.Sound;
 
 public class View2D extends JPanel implements Runnable{
 
@@ -26,9 +27,10 @@ public class View2D extends JPanel implements Runnable{
     Thread gameThread;
 
     // Initiate Entities
-    Player player = new Player();
+    Platform platform = new Platform();
     Ball ball = new Ball();
     Model model = new Model();
+    Sound sound = new Sound();
     int score = 0;
 
     /* Sets up the initial properties of the game panel */
@@ -40,15 +42,15 @@ public class View2D extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
 
-        //setup player
-        player.setSizes(100,25);
-        player.setPosition(screenWidth/2 - player.getSizeX()/2,(int)(screenHeight * 0.75));
-        player.setColor(Color.orange);
-        player.setSpeed(6);
+        //setup platform
+        platform.setSizes(100,25);
+        platform.setPosition(screenWidth/2 - platform.getSizeX()/2,(int)(screenHeight * 0.75));
+        platform.setColor(Color.orange);
+        platform.setSpeed(6);
 
         //setup ball
         ball.setSizes(25);
-        ball.setPosition(screenWidth/2 - ball.getRadius()/2, (int)(screenHeight * 0.75)-player.getSizeY());
+        ball.setPosition(screenWidth/2 - ball.getRadius()/2, (int)(screenHeight * 0.75)- platform.getSizeY());
         ball.setColor(Color.pink);
         ball.setSpeed(8);
 
@@ -95,21 +97,21 @@ public class View2D extends JPanel implements Runnable{
     public void update() {
         if(keyH.aPressed){
             if(keyH.shiftPressed){
-                player.setX(player.getX()-player.getSpeed()*2);
+                platform.setX(platform.getX()- platform.getSpeed()*2);
             } else {
-                player.setX(player.getX()-player.getSpeed());
+                platform.setX(platform.getX()- platform.getSpeed());
             }
             
         }
         if(keyH.dPressed){
             if(keyH.shiftPressed){
-                player.setX(player.getX()+player.getSpeed()*2);
+                platform.setX(platform.getX()+ platform.getSpeed()*2);
             } else {
-                player.setX(player.getX()+player.getSpeed());
+                platform.setX(platform.getX()+ platform.getSpeed());
             }
         }
-        player.collision(screenWidth);
-        score += ball.update(screenWidth, screenHeight, player, model.bricks);
+        platform.collision(screenWidth);
+        score += ball.update(screenWidth, screenHeight, platform, model.bricks, sound);
     }
 
     //Standard method for drawing in JPanel
@@ -118,8 +120,12 @@ public class View2D extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
 
-        g2.setColor(player.getColor());
-        g2.fillRect(player.getX(),player.getY(),player.getSizeX(),player.getSizeY());
+        g2.setColor(platform.getColor());
+        g2.fillRect(platform.getX(), platform.getY(), platform.getSizeX(), platform.getSizeY());
+
+        //MAKE PRETTY - TEXT SHOWING SCORE ON BALL
+        g2.setColor(Color.black);
+        g2.drawString(this.score + "", platform.getX(),platform.getY()+platform.getSizeY()/2);
 
         g2.setColor(ball.getColor());
         g2.fillOval(ball.getX(),ball.getY(),ball.getRadius(),ball.getRadius());
@@ -132,5 +138,10 @@ public class View2D extends JPanel implements Runnable{
         }
 
         g2.dispose();
+    }
+
+    //method for getting score from game.
+    public int getScore(){
+        return this.score;
     }
 }

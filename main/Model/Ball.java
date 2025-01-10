@@ -62,7 +62,7 @@ public class Ball extends Entity {
     }
 
 
-    public int update(int screenWidth, int screenHeight, Player player, Brick[][] bricks){
+    public int update(int screenWidth, int screenHeight, Platform platform, Brick[][] bricks, Sound sound){
         super.setX(this.getX() + this.vectorX);
         super.setY(this.getY() + this.vectorY);
 
@@ -79,16 +79,16 @@ public class Ball extends Entity {
             this.vectorY *= -1;
         }
 
-        if(y < player.getY() + player.getSizeY() + size && y > player.getY() - size &&
-         x < player.getX() + player.getSizeX() + size && x > player.getX() - size){
-            this.collision(player.getX(), player.getY(), player.getSizeX(), player.getSizeY());
+        if(y < platform.getY() + platform.getSizeY() + size && y > platform.getY() - size &&
+         x < platform.getX() + platform.getSizeX() + size && x > platform.getX() - size){
+            this.collision(platform.getX(), platform.getY(), platform.getSizeX(), platform.getSizeY());
          }
 
          for(Brick[] brickList : bricks){
             for(Brick brick : brickList){
                 if(y < brick.getY() + brick.getSizeY() + size && y > brick.getY() - size && 
                 x < brick.getX() + brick.getSizeX() + size && x > brick.getX() - size){
-                    score += this.collision(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY(), brick);
+                    score += this.collision(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY(), brick, sound);
                 }
             }
          }
@@ -97,7 +97,7 @@ public class Ball extends Entity {
     }
 
     //For bricks
-    public int collision(int entityX, int entityY, int entitySizeX, int entitySizeY, Brick brick){
+    public int collision(int entityX, int entityY, int entitySizeX, int entitySizeY, Brick brick, Sound sound){
         int action = 0;
         int size = this.radius / 2;
         int score = 0;
@@ -111,8 +111,8 @@ public class Ball extends Entity {
 
         outerloop:
         for(int[] pos : ballPositions){
-            if(pos[1] < entityY + entitySizeY + size && pos[1] > entityY - size &&
-                    pos[0] < entityX + entitySizeX + size && pos[0] > entityX - size){
+            if(pos[1] < entityY + entitySizeY && pos[1] > entityY &&
+                    pos[0] < entityX + entitySizeX && pos[0] > entityX){
                         action = pos[2];
                         break outerloop;
                     }
@@ -128,6 +128,7 @@ public class Ball extends Entity {
         if(action != 0){
             score = brick.getScore();
             brick.destroyBrick();
+            sound.playSE(1);
         }
 
         return score;
