@@ -14,12 +14,6 @@ import main.Model.Player;
 
 public class View2D extends JPanel implements Runnable{
 
-    // Gets resolution of screen
-    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-
-    final int screenWidth = (int) (size.getWidth() / 2.5 - 7); 
-    final int screenHeight = (int) size.getHeight(); 
-
     int FPS = 60;
 
     Controller keyH = new Controller();
@@ -34,7 +28,7 @@ public class View2D extends JPanel implements Runnable{
     /* Sets up the initial properties of the game panel */
     public View2D(){
 
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -42,13 +36,13 @@ public class View2D extends JPanel implements Runnable{
 
         //setup player
         player.setSizes(100,25);
-        player.setPosition(screenWidth/2 - player.getSizeX()/2,(int)(screenHeight * 0.75));
+        player.setPosition(Config.SCREEN_WIDTH/2 - player.getSizeX()/2,(int)(Config.SCREEN_HEIGHT * 0.75));
         player.setColor(Color.orange);
         player.setSpeed(6);
 
         //setup ball
         ball.setSizes(25);
-        ball.setPosition(screenWidth/2 - ball.getRadius()/2, (int)(screenHeight * 0.75)-player.getSizeY());
+        ball.setPosition(Config.SCREEN_WIDTH/2 - ball.getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)-player.getSizeY());
         ball.setColor(Color.pink);
         ball.setSpeed(8);
 
@@ -108,8 +102,8 @@ public class View2D extends JPanel implements Runnable{
                 player.setX(player.getX()+player.getSpeed());
             }
         }
-        player.collision(screenWidth);
-        score += ball.update(screenWidth, screenHeight, player, model.bricks);
+        player.collision(Config.SCREEN_WIDTH);
+        score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, player, model.bricks);
     }
 
     //Standard method for drawing in JPanel
