@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import main.Model.Ball;
@@ -14,12 +13,6 @@ import main.Model.Platform;
 import main.Model.Sound;
 
 public class View2D extends JPanel implements Runnable{
-
-    // Gets resolution of screen
-    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-
-    final int screenWidth = (int) (size.getWidth() / 2.5 - 7); 
-    final int screenHeight = (int) size.getHeight(); 
 
     int FPS = 60;
 
@@ -36,7 +29,7 @@ public class View2D extends JPanel implements Runnable{
     /* Sets up the initial properties of the game panel */
     public View2D(){
 
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -44,13 +37,13 @@ public class View2D extends JPanel implements Runnable{
 
         //setup platform
         platform.setSizes(100,25);
-        platform.setPosition(screenWidth/2 - platform.getSizeX()/2,(int)(screenHeight * 0.75));
+        platform.setPosition(Config.SCREEN_WIDTH/2 - platform.getSizeX()/2,(int)(Config.SCREEN_HEIGHT * 0.75));
         platform.setColor(Color.orange);
         platform.setSpeed(6);
 
         //setup ball
         ball.setSizes(25);
-        ball.setPosition(screenWidth/2 - ball.getRadius()/2, (int)(screenHeight * 0.75)- platform.getSizeY());
+        ball.setPosition(Config.SCREEN_WIDTH/2 - ball.getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
         ball.setColor(Color.pink);
         ball.setSpeed(8);
 
@@ -110,8 +103,8 @@ public class View2D extends JPanel implements Runnable{
                 platform.setX(platform.getX()+ platform.getSpeed());
             }
         }
-        platform.collision(screenWidth);
-        score += ball.update(screenWidth, screenHeight, platform, model.bricks, sound);
+        platform.collision(Config.SCREEN_WIDTH);
+        score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, platform, model.bricks, sound);
     }
 
     //Standard method for drawing in JPanel
