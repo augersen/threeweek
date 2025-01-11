@@ -53,6 +53,17 @@ public class View2D extends JPanel implements Runnable{
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
+
+        /* Game window gets focus after the JavaFX to Swing transition */
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            topFrame.setAlwaysOnTop(true); // Window starts in front
+            topFrame.setAlwaysOnTop(false); // Turns off again right away
+
+            topFrame.toFront();
+            topFrame.requestFocus();
+            this.requestFocusInWindow(); // Also gets keyboard focus
+        });
     }
 
     @Override 

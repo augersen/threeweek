@@ -47,7 +47,7 @@
 
 .quit-button {
     -fx-font-size: 20px;
-    -fx-background-color: red;
+    -fx-background-color: #d30e0e;
 }
 
 .start-button {
