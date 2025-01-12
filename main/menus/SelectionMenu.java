@@ -9,12 +9,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Config;
 import main.Main;
+import main.SoundController;
 
 import java.util.Objects;
 
 
 public class SelectionMenu extends Application {
 
+    private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
     public static void main(String[] args) {
         launch(args);
@@ -31,7 +33,16 @@ public class SelectionMenu extends Application {
         // Start Button
         Button startButton = new Button("Start Game");
         startButton.getStyleClass().add("start-button");
-        startButton.setOnAction(e -> startGame(primaryStage));
+        startButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
+            SoundController.stopBackgroundMusic();
+            try {
+                startGame(primaryStage);
+            } catch (Exception ex) {
+                System.out.println("An error occurred while starting the game");
+            }
+
+        });
 
         // Checkboxes
         VBox checkboxRow = new VBox(20);
@@ -47,6 +58,7 @@ public class SelectionMenu extends Application {
         Button backButton = new Button("Back to Menu");
         backButton.getStyleClass().add("default-button");
         backButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
             try {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);

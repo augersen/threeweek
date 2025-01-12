@@ -9,12 +9,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Config;
+import main.SoundController;
 
 import java.util.Objects;
 
 
 public class HighscoresMenu extends Application {
 
+    private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
     public static void main(String[] args) {
         launch(args);
@@ -34,7 +36,7 @@ public class HighscoresMenu extends Application {
         content.getStyleClass().addAll("content-text");
 
         // Highscore Column
-        VBox highscoreColumn = new VBox(10); // Reduced spacing for better readability
+        VBox highscoreColumn = new VBox(10);
         highscoreColumn.setPadding(new Insets(20));
         highscoreColumn.getStyleClass().add("center-aligned");
 
@@ -58,6 +60,7 @@ public class HighscoresMenu extends Application {
         // Back Button
         Button backButton = new Button("Back to Menu");
         backButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
             try {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);

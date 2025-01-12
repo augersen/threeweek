@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Config;
+import main.SoundController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.Objects;
 
 public class BattlepassMenu extends Application {
 
+    private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
     private StackPane root;
 
@@ -71,6 +73,7 @@ public class BattlepassMenu extends Application {
             // Click event for each award
             int finalI = i;
             award.setOnMouseClicked(e -> {
+                SoundController.playMenuSelectSound(SELECTION_SOUND);
                 System.out.println("Clicked award: " + finalI + ", name: " + rewardNames[finalI - 1]);
                 rewardActions.getOrDefault(finalI, () -> showPopUp("No action for award: " + finalI)).run();
             });
@@ -90,6 +93,7 @@ public class BattlepassMenu extends Application {
         Button backButton = new Button("Back to Menu");
         backButton.getStyleClass().add("default-button");
         backButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
             try {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);

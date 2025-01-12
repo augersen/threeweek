@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Sound/Sound.iml" filepath="$PROJECT_DIR$/Sound/Sound.iml" />
-      <module fileurl="file://$PROJECT_DIR$/threeweek.iml" filepath="$PROJECT_DIR$/threeweek.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AugustBreakout.iml" filepath="$PROJECT_DIR$/AugustBreakout.iml" />
     </modules>
   </component>
 </project>
