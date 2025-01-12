@@ -1,5 +1,8 @@
 package main.Model;
 
+/**
+ * Platform is the player controlled platform near the bottom of the screen.
+ */
 public class Platform extends Entity {
     private int speed;
 

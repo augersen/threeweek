@@ -70,7 +70,7 @@ public class SelectionMenu extends Application {
     }
 
     private void startGame(Stage primaryStage) {
-        Main.startGame();
+        Main.startGame(8, 14);
         primaryStage.close();
     }
 }

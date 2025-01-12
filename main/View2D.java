@@ -22,12 +22,12 @@ public class View2D extends JPanel implements Runnable{
     // Initiate Entities
     Platform platform = new Platform();
     Ball ball = new Ball();
-    Model model = new Model();
+    Model model;
     Sound sound = new Sound();
     int score = 0;
 
     /* Sets up the initial properties of the game panel */
-    public View2D(){
+    public View2D(int height, int length){
 
         this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
         this.setBackground(Color.black);
@@ -45,7 +45,9 @@ public class View2D extends JPanel implements Runnable{
         ball.setSizes(25);
         ball.setPosition(Config.SCREEN_WIDTH/2 - ball.getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
         ball.setColor(Color.pink);
-        ball.setSpeed(8);
+
+        //setup model
+        model = new Model(height, length);
 
     }
 
@@ -70,12 +72,21 @@ public class View2D extends JPanel implements Runnable{
     /* The game loop */
     public void run() {
 
+        //Keeps track of time between frames. FPS is by default set to 60.
         double drawInterval = 1000000000 / FPS;
         double nextDrawTime = System.nanoTime() + drawInterval;
-        
+
+        //Game thread is the thread running it all.
         while(gameThread != null){
-            // update: update information such as character positions
+            // update: update information such as character positions, score, etc.
             update();
+
+            //Refactor to work with multiple balls
+            if(!ball.isLive()){
+                System.out.println("You dead as shit"); //Temporary
+                //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
+                break;
+            }
 
             // draw: draw the updated information
             repaint();
@@ -86,7 +97,7 @@ public class View2D extends JPanel implements Runnable{
                 if(remainingTime < 0){
                     remainingTime = 0;
                 }
-
+                //Sleeps just long enough to ensure 60 FPS.
                 Thread.sleep((long)remainingTime / 1000000);
 
                 nextDrawTime = System.nanoTime() + drawInterval;
@@ -98,8 +109,12 @@ public class View2D extends JPanel implements Runnable{
         }
     }
 
+    //Method for calling every entities update, as well as collecting keyboard inputs.
     public void update() {
+        //Checks if 'a' is pressed. Platform goes left if a is pressed, goes right even faster if shift is also pressed.
+        //Starts ball if ball hasn't been started.
         if(keyH.aPressed){
+            if(!ball.isStarted()){ball.setVectorX(-ball.getSpeed()); ball.setVectorY(-ball.getSpeed()); ball.start();}
             if(keyH.shiftPressed){
                 platform.setX(platform.getX()- platform.getSpeed()*2);
             } else {
@@ -107,7 +122,11 @@ public class View2D extends JPanel implements Runnable{
             }
             
         }
+
+        //Checks if 'd' is pressed. Platform goes right if d is pressed, goes right even faster if shift is also pressed.
+        //Starts ball if ball hasn't been started.
         if(keyH.dPressed){
+            if(!ball.isStarted()){ball.setVectorX(ball.getSpeed()); ball.setVectorY(-ball.getSpeed()); ball.start();}
             if(keyH.shiftPressed){
                 platform.setX(platform.getX()+ platform.getSpeed()*2);
             } else {
@@ -115,7 +134,10 @@ public class View2D extends JPanel implements Runnable{
             }
         }
         platform.collision(Config.SCREEN_WIDTH);
+
+        //Refactor ball code to allow multiple balls later on!
         score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, platform, model.bricks, sound);
+
     }
 
     //Standard method for drawing in JPanel

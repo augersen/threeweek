@@ -7,13 +7,15 @@ import java.awt.Dimension;
 public class Model {
     public Brick[][] bricks;
     private int score;
-    private int height = 8;
-    private int length = 14;
+    private int height;
+    private int length;
     private Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     private int sizeX = (int) (size.getWidth() / 2.5 / 14 - 5);
     private int sizeY = 25;
 
-    public Model(){
+    public Model(int height, int length){
+        this.height = height;
+        this.length = length;
         //Creates grid of Bricks
         this.bricks = new Brick[this.height][this.length];
 

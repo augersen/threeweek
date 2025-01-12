@@ -2,6 +2,10 @@ package main.Model;
 
 import java.awt.Color;
 
+/**
+ * Bricks that ball can destroy. Gives a score. Mostly used in a 2d array.
+ * Makes sound!
+ */
 public class Brick extends Entity {
     private int score;
 
