@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class testMain {
     public static void main(String[] args){
-        startGame(8, 14);
+        startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
 
         //Startmenu
 

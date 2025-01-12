@@ -14,7 +14,7 @@ import main.Model.Sound;
 
 public class View2D extends JPanel implements Runnable{
 
-    int FPS = 60;
+    int FPS = Config.FPS;
 
     Controller keyH = new Controller();
     Thread gameThread;

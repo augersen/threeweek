@@ -11,6 +11,7 @@ public class Sound {
     Clip clip;
     URL[] soundURL = new URL[10];
 
+
     public Sound() {
 
         soundURL[0] = getClass().getResource("/main/resources/sounds/retroBassEffectForLoop.wav");
