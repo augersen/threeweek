@@ -85,6 +85,7 @@ public class View2D extends JPanel implements Runnable{
             if(!ball.isLive()){
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
+                //TODO AAAAAAAAAAAAAAAAAAH JEG KAN IKKE FÅ DEATHSCREEN TIL AT VISE SIG!!! kh jeff
                 break;
             }
 
