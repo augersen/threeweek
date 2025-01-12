@@ -70,7 +70,6 @@ public class StartMenu extends Application {
         battlepassButton.getStyleClass().add("battlepass-button");
         battlepassButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
-            SoundController.stopBackgroundMusic();
             try {
                 BattlepassMenu battlepassMenu = new BattlepassMenu();
                 battlepassMenu.start(primaryStage);

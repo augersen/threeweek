@@ -24,6 +24,7 @@ import java.util.Objects;
 public class BattlepassMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
+    private static final String AWARD_SELECT = "/main/resources/sounds/fanfare.wav";
 
     private StackPane root;
 
@@ -73,7 +74,7 @@ public class BattlepassMenu extends Application {
             // Click event for each award
             int finalI = i;
             award.setOnMouseClicked(e -> {
-                SoundController.playMenuSelectSound(SELECTION_SOUND);
+                SoundController.playMenuSelectSound(AWARD_SELECT);
                 System.out.println("Clicked award: " + finalI + ", name: " + rewardNames[finalI - 1]);
                 rewardActions.getOrDefault(finalI, () -> showPopUp("No action for award: " + finalI)).run();
             });

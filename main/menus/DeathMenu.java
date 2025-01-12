@@ -1,6 +1,8 @@
 package main.menus;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -52,10 +54,13 @@ public class DeathMenu extends Application {
         fadeInYouDied.setToValue(1);   // Fully visible
         fadeInYouDied.play();
 
+        //fade-in effect for score
         FadeTransition fadeInScore = new FadeTransition(Duration.seconds(4), scoreText);
         fadeInScore.setFromValue(0);
         fadeInScore.setToValue(1);
         fadeInScore.play();
+
+
 
         // Start Button
         Button playAgainButton = new Button("Play again!");
@@ -84,6 +89,18 @@ public class DeathMenu extends Application {
             }
 
         });
+
+        //fade-in effect for score
+        FadeTransition fadeButtonPlay = new FadeTransition(Duration.seconds(6), playAgainButton);
+        fadeButtonPlay.setFromValue(0);
+        fadeButtonPlay.setToValue(1);
+        fadeButtonPlay.play();
+
+        //fade-in effect for score
+        FadeTransition fadeButtonBack = new FadeTransition(Duration.seconds(6), backButton);
+        fadeButtonBack.setFromValue(0);
+        fadeButtonBack.setToValue(1);
+        fadeButtonBack.play();
 
         // Layout
         VBox menu = new VBox();
