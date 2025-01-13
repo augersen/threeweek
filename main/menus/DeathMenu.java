@@ -31,8 +31,6 @@ public class DeathMenu extends Application {
         this.score = 0;
     }
 
-
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -104,9 +102,8 @@ public class DeathMenu extends Application {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
+        primaryStage.setAlwaysOnTop(true);
         primaryStage.show();
-
-        System.out.println("DeathMenu is now visible!");
     }
 
     private void startGame(Stage primaryStage) {
@@ -121,11 +118,5 @@ public class DeathMenu extends Application {
         fadeEffect.setToValue(1);
         fadeEffect.play();
     }
-
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
 
 }

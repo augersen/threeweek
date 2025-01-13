@@ -18,9 +18,6 @@ public class HighscoresMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) {

@@ -19,9 +19,7 @@ public class SelectionMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -38,6 +36,7 @@ public class SelectionMenu extends Application {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
             SoundController.stopBackgroundMusic();
             startGame(primaryStage);
+
         });
 
         // Checkboxes
@@ -77,9 +76,9 @@ public class SelectionMenu extends Application {
         primaryStage.show();
     }
 
-    private void startGame(Stage primaryStage) {
+    private void startGame(Stage selectStage) {
         Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
-        primaryStage.close();
+        selectStage.close();
     }
 
 

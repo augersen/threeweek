@@ -19,9 +19,7 @@ public class StartMenu extends Application {
 
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 
     private static final String BACKGROUND_MUSIC = "/main/resources/sounds/menuMusic.wav";
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";

@@ -17,6 +17,8 @@ import main.menus.DeathMenu;
 
 public class View2D extends JPanel implements Runnable{
 
+    private Stage primaryStage;
+
     int FPS = Config.FPS;
 
     Controller keyH = new Controller();
@@ -89,8 +91,8 @@ public class View2D extends JPanel implements Runnable{
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
                 //TODO AAAAAAAAAAAAAAAAAAH JEG KAN IKKE FÅ DEATHSCREEN TIL AT VISE PÅ EN SMOOTH MÅDE!!! kh jeff
-
-                break;
+                showDeathScreen();
+                return;
 
             }
 
@@ -176,5 +178,38 @@ public class View2D extends JPanel implements Runnable{
     public int getScore(){
         return this.score;
     }
+
+    public void showDeathScreen() {
+        int finalScore = this.score;
+
+        // Dispose of the Swing JFrame
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            if (topFrame != null) {
+                topFrame.dispose();
+                System.out.println("Swing JFrame disposed.");
+            }
+        });
+
+        // Show JavaFX DeathMenu
+        javafx.application.Platform.startup(() -> {
+            try {
+                System.out.println("Setting up DeathMenu...");
+                if (primaryStage == null) {
+                    primaryStage = new Stage();
+                }
+                DeathMenu deathMenu = new DeathMenu(finalScore);
+                deathMenu.start(primaryStage);
+                if (!primaryStage.isShowing()) {
+                    primaryStage.show();
+                }
+            } catch (Exception e) {
+                System.err.println("Error showing DeathMenu: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+
 
 }
