@@ -3,6 +3,7 @@ package main.menus;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -24,6 +25,10 @@ public class DeathMenu extends Application {
 
     public DeathMenu(int score) {
         this.score = score;
+    }
+
+    public DeathMenu() {
+        this.score = 0;
     }
 
 
@@ -48,18 +53,10 @@ public class DeathMenu extends Application {
         root.setStyle("-fx-background-color: black;");
 
         //fade-in effect for YOU DIED
-        FadeTransition fadeInYouDied = new FadeTransition(Duration.seconds(2), youDiedText);
-        fadeInYouDied.setFromValue(0); // Fully transparent
-        fadeInYouDied.setToValue(1);   // Fully visible
-        fadeInYouDied.play();
+        fadeInEffect(root, 2);
 
         //fade-in effect for score
-        FadeTransition fadeInScore = new FadeTransition(Duration.seconds(4), scoreText);
-        fadeInScore.setFromValue(0);
-        fadeInScore.setToValue(1);
-        fadeInScore.play();
-
-
+        fadeInEffect(scoreText, 4);
 
         // Start Button
         Button playAgainButton = new Button("Play again!");
@@ -86,16 +83,10 @@ public class DeathMenu extends Application {
         });
 
         //fade-in effect for score
-        FadeTransition fadeButtonPlay = new FadeTransition(Duration.seconds(6), playAgainButton);
-        fadeButtonPlay.setFromValue(0);
-        fadeButtonPlay.setToValue(1);
-        fadeButtonPlay.play();
+        fadeInEffect(playAgainButton, 6);
 
         //fade-in effect for score
-        FadeTransition fadeButtonBack = new FadeTransition(Duration.seconds(6), backButton);
-        fadeButtonBack.setFromValue(0);
-        fadeButtonBack.setToValue(1);
-        fadeButtonBack.play();
+        fadeInEffect(backButton, 6);
 
         // Layout
         VBox menu = new VBox();
@@ -117,6 +108,14 @@ public class DeathMenu extends Application {
     private void startGame(Stage primaryStage) {
         Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
         primaryStage.close();
+    }
+
+    //method for easier implementation of the fade in animation/effect
+    public void fadeInEffect(Node node, int duration) {
+        FadeTransition fadeEffect = new FadeTransition(Duration.seconds(duration), node);
+        fadeEffect.setFromValue(0);
+        fadeEffect.setToValue(1);
+        fadeEffect.play();
     }
 
 
