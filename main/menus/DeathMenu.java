@@ -25,6 +25,10 @@ public class DeathMenu extends Application {
         this.score = score;
     }
 
+    public DeathMenu() {
+        this.score = 0;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
