@@ -2,6 +2,7 @@ package main.menus;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -19,15 +20,12 @@ import java.util.Objects;
 public class DeathMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
-    private int score;
+    private final int score;
 
     public DeathMenu(int score) {
         this.score = score;
     }
 
-    public DeathMenu() {
-        this.score = 0;
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -69,11 +67,7 @@ public class DeathMenu extends Application {
         playAgainButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
             SoundController.stopBackgroundMusic();
-            try {
-                startGame(primaryStage);
-            } catch (Exception ex) {
-                System.out.println("An error occurred while starting the game");
-            }
+            startGame(primaryStage);
 
         });
 
@@ -116,11 +110,16 @@ public class DeathMenu extends Application {
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
+
+        System.out.println("DeathMenu is now visible!");
     }
 
     private void startGame(Stage primaryStage) {
         Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
         primaryStage.close();
     }
+
+
+
 
 }

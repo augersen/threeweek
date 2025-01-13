@@ -1,6 +1,7 @@
 package main.menus;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -36,12 +37,7 @@ public class SelectionMenu extends Application {
         startButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
             SoundController.stopBackgroundMusic();
-            try {
-                startGame(primaryStage);
-            } catch (Exception ex) {
-                System.out.println("An error occurred while starting the game");
-            }
-
+            startGame(primaryStage);
         });
 
         // Checkboxes
@@ -85,4 +81,8 @@ public class SelectionMenu extends Application {
         Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
         primaryStage.close();
     }
+
+
+
+
 }

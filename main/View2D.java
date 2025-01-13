@@ -6,11 +6,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
+
+import javafx.stage.Stage;
 import main.Model.Ball;
 import main.Model.Brick;
 import main.Model.Model;
 import main.Model.Platform;
 import main.Model.Sound;
+import main.menus.DeathMenu;
 
 public class View2D extends JPanel implements Runnable{
 
@@ -68,7 +71,7 @@ public class View2D extends JPanel implements Runnable{
         });
     }
 
-    @Override 
+    @Override
     /* The game loop */
     public void run() {
 
@@ -86,9 +89,8 @@ public class View2D extends JPanel implements Runnable{
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
                 //TODO AAAAAAAAAAAAAAAAAAH JEG KAN IKKE FÅ DEATHSCREEN TIL AT VISE PÅ EN SMOOTH MÅDE!!! kh jeff
-                showDeathMenu();
-                return; // Exit the run method
 
+                break;
 
             }
 
@@ -97,7 +99,7 @@ public class View2D extends JPanel implements Runnable{
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
-                
+
                 if(remainingTime < 0){
                     remainingTime = 0;
                 }
@@ -107,7 +109,7 @@ public class View2D extends JPanel implements Runnable{
                 nextDrawTime = System.nanoTime() + drawInterval;
 
             } catch (InterruptedException e) {
-                
+
                 e.printStackTrace();
             }
         }
@@ -124,7 +126,7 @@ public class View2D extends JPanel implements Runnable{
             } else {
                 platform.setX(platform.getX()- platform.getSpeed());
             }
-            
+
         }
 
         //Checks if 'd' is pressed. Platform goes right if d is pressed, goes right even faster if shift is also pressed.
@@ -159,7 +161,7 @@ public class View2D extends JPanel implements Runnable{
 
         g2.setColor(ball.getColor());
         g2.fillOval(ball.getX(),ball.getY(),ball.getRadius(),ball.getRadius());
-        
+
         for(Brick[] brickList : model.bricks){
             for(Brick brick : brickList){
                 g2.setColor(brick.getColor());
@@ -173,29 +175,6 @@ public class View2D extends JPanel implements Runnable{
     //method for getting score from game.
     public int getScore(){
         return this.score;
-    }
-
-    private void showDeathMenu() {
-        int finalScore = this.score; //For retrieving the score
-
-        // Close the current JFrame
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-            if (topFrame != null) {
-                topFrame.dispose(); // Close the Swing window
-            }
-
-            // Initialize JavaFX platform and launch DeathMenu
-            new Thread(() -> {
-                javafx.application.Platform.startup(() -> { //launches the JavaFX window - shoutout til randers på stackoverflow
-                    try {
-                        new main.menus.DeathMenu(finalScore).start(new javafx.stage.Stage());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-            }).start();
-        });
     }
 
 }
