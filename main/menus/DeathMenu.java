@@ -1,8 +1,6 @@
 package main.menus;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,20 +11,19 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Config;
 import main.Main;
-
-import main.Model.Brick;
 import main.SoundController;
-
 import java.util.Objects;
 
 
 
 public class DeathMenu extends Application {
 
-    Brick brick = new Brick();
-
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
-    private final int score = brick.getScore();
+    private int score;
+
+    public DeathMenu(int score) {
+        this.score = score;
+    }
 
     public static void main(String[] args) {
         launch(args);

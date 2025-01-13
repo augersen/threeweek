@@ -85,8 +85,11 @@ public class View2D extends JPanel implements Runnable{
             if(!ball.isLive()){
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
-                //TODO AAAAAAAAAAAAAAAAAAH JEG KAN IKKE FÅ DEATHSCREEN TIL AT VISE SIG!!! kh jeff
-                break;
+                //TODO AAAAAAAAAAAAAAAAAAH JEG KAN IKKE FÅ DEATHSCREEN TIL AT VISE PÅ EN SMOOTH MÅDE!!! kh jeff
+                showDeathMenu();
+                return; // Exit the run method
+
+
             }
 
             // draw: draw the updated information
@@ -171,4 +174,28 @@ public class View2D extends JPanel implements Runnable{
     public int getScore(){
         return this.score;
     }
+
+    private void showDeathMenu() {
+        int finalScore = this.score; //For retrieving the score
+
+        // Close the current JFrame
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            if (topFrame != null) {
+                topFrame.dispose(); // Close the Swing window
+            }
+
+            // Initialize JavaFX platform and launch DeathMenu
+            new Thread(() -> {
+                javafx.application.Platform.startup(() -> { //launches the JavaFX window - shoutout til randers på stackoverflow
+                    try {
+                        new main.menus.DeathMenu(finalScore).start(new javafx.stage.Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }).start();
+        });
+    }
+
 }
