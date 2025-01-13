@@ -21,7 +21,7 @@ import java.util.Objects;
 public class DeathMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
-    private final int score;
+    private int score;
 
     public DeathMenu(int score) {
         this.score = score;
@@ -32,12 +32,16 @@ public class DeathMenu extends Application {
     }
 
 
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        if (this.score == 0) {
+            throw new IllegalStateException("Score must be set before displaying the DeathMenu.");
+        }
         primaryStage.setTitle("Breakout");
 
         // TOU DIED
@@ -119,6 +123,9 @@ public class DeathMenu extends Application {
     }
 
 
+    public void setScore(int score) {
+        this.score = score;
+    }
 
 
 }
