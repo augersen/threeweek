@@ -19,6 +19,7 @@ public class Sound {
         soundURL[3] = getClass().getResource("/main/resources/sounds/menuSelectSound.wav");
         soundURL[4] = getClass().getResource("/main/resources/sounds/fanfare.wav");
         soundURL[5] = getClass().getResource("/main/resources/sounds/fail.wav");
+        soundURL[5] = getClass().getResource("/main/resources/sounds/Death.wav");
 
 
 
