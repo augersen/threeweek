@@ -34,7 +34,7 @@ public class HighscoresMenu extends Application {
         // Highscore Column
         VBox highscoreColumn = new VBox(10);
         highscoreColumn.setPadding(new Insets(20));
-        highscoreColumn.getStyleClass().add("center-aligned");
+        highscoreColumn.getStyleClass().addAll("center-aligned", "VBox-background");
 
         // Load and display scores
         List<Integer> scores = ScoreManager.readScores();
@@ -44,13 +44,9 @@ public class HighscoresMenu extends Application {
             highscoreColumn.getChildren().add(highscoreText);
         }
 
-        // ScrollPane
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(highscoreColumn);
-        scrollPane.setFitToWidth(true); // Fit width of ScrollPane
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Disable horizontal scrolling
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // Enable vertical scrolling
-        scrollPane.getStyleClass().add("scrollpane-background");
+        //title for regular game highscores
+        Text regularTitle = new Text("Best performances without modifiers!");
+        regularTitle.getStyleClass().add("highscore-title-text");
 
         // Back Button
         Button backButton = new Button("Back to Menu");
@@ -62,13 +58,12 @@ public class HighscoresMenu extends Application {
             } catch (Exception ex) {
                 System.out.println("An error occurred while returning to the StartMenu");
             }
-
         });
         backButton.getStyleClass().add("default-button");
 
         // Layout
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(title, content, scrollPane, backButton);
+        layout.getChildren().addAll(title, content,regularTitle, highscoreColumn, backButton);
         layout.setPadding(new Insets(20));
         layout.getStyleClass().addAll("scene-background", "center-aligned");
 

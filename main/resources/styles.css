@@ -18,6 +18,12 @@
     -fx-fill: white;
 }
 
+.highscore-title-text {
+    -fx-font-size: 22px;
+    -fx-font-family: "Arial";
+    -fx-fill: linear-gradient(from 0% 0% to 100% 0%, gold, silver, palegreen);
+}
+
 .highscore-text {
     -fx-font-size: 20px;
     -fx-font-family: "Arial";
@@ -59,6 +65,15 @@
 .scrollpane-background {
     -fx-background: #000000;
 }
+
+/* Highscore VBox background */
+.VBox-background {
+    -fx-background-color: #252525; /* Replace with your desired color */
+    -fx-border-color: palegreen; /* Optional: Add a border */
+    -fx-border-width: 3;       /* Optional: Border thickness */
+    -fx-padding: 10;           /* Optional: Internal spacing */
+}
+
 
 /* Center text */
 .centered-text {

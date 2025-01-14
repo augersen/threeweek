@@ -28,7 +28,6 @@ public class BattlepassMenu extends Application {
 
     private StackPane root;
 
-
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Battlepass");
@@ -36,7 +35,6 @@ public class BattlepassMenu extends Application {
         root = new StackPane();
         root.getStyleClass().add("stackpane-root");
         root.setPadding(new Insets(0));
-
 
         // Title
         Text title = new Text("Battlepass");
