@@ -9,15 +9,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Config;
+import main.ScoreManager;
 import main.SoundController;
 
-import java.util.Objects;
-
+import java.util.*;
 
 public class HighscoresMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -37,12 +36,11 @@ public class HighscoresMenu extends Application {
         highscoreColumn.setPadding(new Insets(20));
         highscoreColumn.getStyleClass().add("center-aligned");
 
-        // Highscore Text
-        for (int i = 1; i <= 3; i++) {
-            Text highscoreText = new Text(i + ". Platform" + i + " - " + (1000 - i * 10) + " Points");
+        // Load and display scores
+        List<Integer> scores = ScoreManager.readScores();
+        for (int i = 0; i < scores.size(); i++) {
+            Text highscoreText = new Text((i + 1) + ". Score: " + scores.get(i));
             highscoreText.getStyleClass().add("highscore-text");
-
-            // Add each high score text to the column
             highscoreColumn.getChildren().add(highscoreText);
         }
 
@@ -82,4 +80,6 @@ public class HighscoresMenu extends Application {
         primaryStage.centerOnScreen();
         primaryStage.show();
     }
+
+
 }

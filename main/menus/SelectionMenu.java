@@ -7,18 +7,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import main.Config;
-import main.Main;
+import main.GameLauncher;
 import main.SoundController;
 
 import java.util.Objects;
 
-
 public class SelectionMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
-
-
 
     @Override
     public void start(Stage primaryStage) {
@@ -79,13 +77,5 @@ public class SelectionMenu extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    private void startGame(Stage selectStage) {
-        Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
-        selectStage.close();
-    }
-
-
-
 
 }

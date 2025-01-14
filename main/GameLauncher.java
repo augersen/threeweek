@@ -1,17 +1,16 @@
-package main.menus;
+package main;
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.Config;
-import main.View2D;
 
 import javax.swing.SwingUtilities;
 
 public class GameLauncher extends Application {
 
+    //SHOUTOUT TIL MOOLERIAN STACKOVERFLOW
     private static Stage gameStage; // Reference to the game stage
 
     @Override

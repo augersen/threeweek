@@ -11,11 +11,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Config;
-import main.Main;
+import main.GameLauncher;
+import main.ScoreManager;
 import main.SoundController;
+
 import java.util.Objects;
-
-
 
 public class DeathMenu extends Application {
 
@@ -31,6 +31,10 @@ public class DeathMenu extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void saveScoreToManager(int score) {
+        ScoreManager.saveScore(score);
     }
 
     @Override
@@ -49,6 +53,10 @@ public class DeathMenu extends Application {
 
         Text scoreText = new Text("Score: " + score);
         scoreText.getStyleClass().addAll("content-text", "center-aligned");
+
+        //SAVE SCORE
+        saveScoreToManager(this.score);
+        System.out.println("Score saved: " + this.score);
 
         // Center the text in the window
         StackPane root = new StackPane();
@@ -90,10 +98,10 @@ public class DeathMenu extends Application {
 
         });
 
-        //fade-in effect for score
+        //fade-in effect for playAgainButton
         fadeInEffect(playAgainButton, 9);
 
-        //fade-in effect for score
+        //fade-in effect for backButton
         fadeInEffect(backButton, 9);
 
         // Layout
@@ -110,11 +118,6 @@ public class DeathMenu extends Application {
         primaryStage.centerOnScreen();
         primaryStage.setAlwaysOnTop(true);
         primaryStage.show();
-    }
-
-    private void startGame(Stage primaryStage) {
-        Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
-        primaryStage.close();
     }
 
     //method for easier implementation of the fade in animation/effect

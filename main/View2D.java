@@ -17,7 +17,6 @@ import main.menus.DeathMenu;
 
 public class View2D extends JPanel implements Runnable{
 
-    private Stage primaryStage;
     private Stage gameStage;
 
     int FPS = Config.FPS;
