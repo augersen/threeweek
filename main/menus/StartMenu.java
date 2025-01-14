@@ -6,11 +6,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Config;
+import main.SoundController;
 
 import java.util.Objects;
 
@@ -18,11 +18,7 @@ import java.util.Objects;
 public class StartMenu extends Application {
 
     private static final String BACKGROUND_MUSIC = "/main/resources/sounds/menuMusic.wav";
-    private AudioClip backgroundMusic;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
     @Override
     public void start(Stage primaryStage) {
@@ -32,10 +28,8 @@ public class StartMenu extends Application {
         Text title = new Text("Breakout");
         title.getStyleClass().addAll("title-text", "centered-text");
 
-        // background music
-        backgroundMusic = new AudioClip(Objects.requireNonNull(getClass().getResource(BACKGROUND_MUSIC)).toString());
-        backgroundMusic.setCycleCount(AudioClip.INDEFINITE);
-        backgroundMusic.play();
+        // Play background music
+        SoundController.playBackgroundMusic(BACKGROUND_MUSIC);
 
         //attempt at animation
         // Scaling animation
@@ -55,20 +49,23 @@ public class StartMenu extends Application {
         Button selectionButton = new Button("Play!");
         selectionButton.getStyleClass().add("play-button");
         selectionButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
+            System.out.println("Selection Menu");
             try {
                 SelectionMenu selectionMenu = new SelectionMenu();
                 selectionMenu.start(primaryStage);
             } catch (Exception ex) {
                 System.out.println("An error occurred while opening SelectionMenu");
             }
-
         });
+
 
         //battlepass
         Button battlepassButton = new Button("Battlepass");
         battlepassButton.getStyleClass().add("battlepass-button");
         battlepassButton.setOnAction(e -> {
-            stopBackgroundMusic();
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
+            System.out.println("Battlepass Menu");
             try {
                 BattlepassMenu battlepassMenu = new BattlepassMenu();
                 battlepassMenu.start(primaryStage);
@@ -82,7 +79,8 @@ public class StartMenu extends Application {
         Button highscoresButton = new Button("Highscores");
         highscoresButton.getStyleClass().add("highscore-button");
         highscoresButton.setOnAction(e -> {
-            stopBackgroundMusic();
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
+            System.out.println("Highscores Menu");
             try {
                 HighscoresMenu highscoresMenu = new HighscoresMenu();
                 highscoresMenu.start(primaryStage);
@@ -95,6 +93,7 @@ public class StartMenu extends Application {
         //quit button
         Button quitButton = new Button("Quit Game");
         quitButton.getStyleClass().add("quit-button");
+        System.out.println("Quit Game");
         quitButton.setOnAction(e -> System.exit(0));
 
         // Layout
@@ -112,10 +111,4 @@ public class StartMenu extends Application {
         primaryStage.show();
     }
 
-    // Stop the background music
-    private void stopBackgroundMusic() {
-        if (backgroundMusic != null) {
-            backgroundMusic.stop();
-        }
-    }
 }

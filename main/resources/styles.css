@@ -103,12 +103,21 @@
     -fx-text-alignment: center;
 }
 
+/*YOU DIED*/
+.you-died-text {
+    -fx-font-family: "Serif";
+    -fx-font-size: 100px; /*size*/
+    -fx-font-weight: bold;
+    -fx-fill: darkred; /* Text color */
+    -fx-effect: dropshadow(gaussian, black, 10, 0.5, 0, 0); /* shadow for dramatic effect */
+}
+
 /* Pop-up background styling */
 .popup-background {
     -fx-background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
     -fx-padding: 20px;
     -fx-border-radius: 10; /* Rounded corners */
     -fx-background-radius: 10; /* Match rounded corners */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0); /* Optional: Shadow effect */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0); /* Shadow effect */
 }
 

@@ -1,6 +1,7 @@
 package main.menus;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -9,16 +10,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Config;
 import main.Main;
+import main.SoundController;
 
 import java.util.Objects;
 
 
 public class SelectionMenu extends Application {
 
+    private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -31,7 +32,17 @@ public class SelectionMenu extends Application {
         // Start Button
         Button startButton = new Button("Start Game");
         startButton.getStyleClass().add("start-button");
-        startButton.setOnAction(e -> startGame(primaryStage));
+        startButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
+            SoundController.stopBackgroundMusic();
+            try {
+                new GameLauncher().start(new Stage()); // Launch the game
+                primaryStage.close(); // Close the current menu
+            } catch (Exception ex) {
+                System.out.println("An error occurred while launching the game");
+                ex.printStackTrace();
+            }
+        });
 
         // Checkboxes
         VBox checkboxRow = new VBox(20);
@@ -47,6 +58,7 @@ public class SelectionMenu extends Application {
         Button backButton = new Button("Back to Menu");
         backButton.getStyleClass().add("default-button");
         backButton.setOnAction(e -> {
+            SoundController.playMenuSelectSound(SELECTION_SOUND);
             try {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);
@@ -69,8 +81,12 @@ public class SelectionMenu extends Application {
         primaryStage.show();
     }
 
-    private void startGame(Stage primaryStage) {
-        Main.startGame();
-        primaryStage.close();
+    private void startGame(Stage selectStage) {
+        Main.startGame(Config.BRICK_HEIGHT, Config.BRICK_LENGTH);
+        selectStage.close();
     }
+
+
+
+
 }
