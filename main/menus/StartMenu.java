@@ -93,7 +93,6 @@ public class StartMenu extends Application {
         //quit button
         Button quitButton = new Button("Quit Game");
         quitButton.getStyleClass().add("quit-button");
-        System.out.println("Quit Game");
         quitButton.setOnAction(e -> System.exit(0));
 
         // Layout

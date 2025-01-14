@@ -48,8 +48,33 @@ public class SelectionMenu extends Application {
             CheckBox checkBox = new CheckBox("Modifier: " + i);
             checkBox.getStyleClass().add("check-box");
             checkboxRow.getChildren().add(checkBox);
-        }
 
+            int finalI = i;
+            checkBox.setOnAction(e -> {
+                if (checkBox.isSelected()) {
+                    switch (finalI) {
+                        case 1 -> exampleModifier();
+                        case 2 -> System.out.println(1);
+                        case 3 -> System.out.println(2);
+                        case 4 -> System.out.println(3);
+                        case 5 -> System.out.println(4);
+                        case 6 -> System.out.println(5);
+                        default -> System.out.println("Unknown modifier activated");
+                    }
+                } else {
+                    switch (finalI) {
+                        case 1 -> disableExampleModifier();
+                        case 2 -> System.out.println(5);
+                        case 3 -> System.out.println(4);
+                        case 4 -> System.out.println(3);
+                        case 5 -> System.out.println(2);
+                        case 6 -> System.out.println(1);
+                        default -> System.out.println("Unknown modifier deactivated");
+                    }
+                }
+            });
+
+        }
 
         // Back Button
         Button backButton = new Button("Back to Menu");
@@ -76,6 +101,13 @@ public class SelectionMenu extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    public void exampleModifier() {
+        System.out.println("Example modifier");
+    }
+    public void disableExampleModifier() {
+        System.out.println("Disable example modifier");
     }
 
 }
