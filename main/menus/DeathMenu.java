@@ -2,7 +2,6 @@ package main.menus;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -66,8 +65,13 @@ public class DeathMenu extends Application {
         playAgainButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
             SoundController.stopBackgroundMusic();
-            startGame(primaryStage);
-
+            try {
+                new GameLauncher().start(new Stage()); // Launch the game
+                primaryStage.close(); // Close the current menu
+            } catch (Exception ex) {
+                System.out.println("An error occurred while launching the game");
+                ex.printStackTrace();
+            }
         });
 
         // Back Button

@@ -17,10 +17,6 @@ import java.util.Objects;
 
 public class StartMenu extends Application {
 
-
-
-
-
     private static final String BACKGROUND_MUSIC = "/main/resources/sounds/menuMusic.wav";
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
@@ -54,6 +50,7 @@ public class StartMenu extends Application {
         selectionButton.getStyleClass().add("play-button");
         selectionButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
+            System.out.println("Selection Menu");
             try {
                 SelectionMenu selectionMenu = new SelectionMenu();
                 selectionMenu.start(primaryStage);
@@ -68,6 +65,7 @@ public class StartMenu extends Application {
         battlepassButton.getStyleClass().add("battlepass-button");
         battlepassButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
+            System.out.println("Battlepass Menu");
             try {
                 BattlepassMenu battlepassMenu = new BattlepassMenu();
                 battlepassMenu.start(primaryStage);
@@ -82,6 +80,7 @@ public class StartMenu extends Application {
         highscoresButton.getStyleClass().add("highscore-button");
         highscoresButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
+            System.out.println("Highscores Menu");
             try {
                 HighscoresMenu highscoresMenu = new HighscoresMenu();
                 highscoresMenu.start(primaryStage);
@@ -94,6 +93,7 @@ public class StartMenu extends Application {
         //quit button
         Button quitButton = new Button("Quit Game");
         quitButton.getStyleClass().add("quit-button");
+        System.out.println("Quit Game");
         quitButton.setOnAction(e -> System.exit(0));
 
         // Layout

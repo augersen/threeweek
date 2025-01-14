@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import javafx.stage.Stage;
 import main.Model.Ball;
@@ -18,6 +18,7 @@ import main.menus.DeathMenu;
 public class View2D extends JPanel implements Runnable{
 
     private Stage primaryStage;
+    private Stage gameStage;
 
     int FPS = Config.FPS;
 
@@ -179,37 +180,25 @@ public class View2D extends JPanel implements Runnable{
         return this.score;
     }
 
-    public void showDeathScreen() {
-        int finalScore = this.score;
-
-        // Dispose of the Swing JFrame
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-            if (topFrame != null) {
-                topFrame.dispose();
-                System.out.println("Swing JFrame disposed.");
+    private void showDeathScreen() {
+        javafx.application.Platform.runLater(() -> {
+            if (gameStage != null) {
+                gameStage.close(); // Close the game window
             }
-        });
 
-        // Show JavaFX DeathMenu
-        javafx.application.Platform.startup(() -> {
+            // Launch the DeathMenu
             try {
-                System.out.println("Setting up DeathMenu...");
-                if (primaryStage == null) {
-                    primaryStage = new Stage();
-                }
-                DeathMenu deathMenu = new DeathMenu(finalScore);
-                deathMenu.start(primaryStage);
-                if (!primaryStage.isShowing()) {
-                    primaryStage.show();
-                }
+                Stage deathStage = new Stage();
+                DeathMenu deathMenu = new DeathMenu(score);
+                deathMenu.start(deathStage);
             } catch (Exception e) {
-                System.err.println("Error showing DeathMenu: " + e.getMessage());
                 e.printStackTrace();
             }
         });
     }
 
-
+    public void setGameStage(Stage stage) {
+        this.gameStage = stage;
+    }
 
 }

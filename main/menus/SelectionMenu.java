@@ -35,8 +35,13 @@ public class SelectionMenu extends Application {
         startButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
             SoundController.stopBackgroundMusic();
-            startGame(primaryStage);
-
+            try {
+                new GameLauncher().start(new Stage()); // Launch the game
+                primaryStage.close(); // Close the current menu
+            } catch (Exception ex) {
+                System.out.println("An error occurred while launching the game");
+                ex.printStackTrace();
+            }
         });
 
         // Checkboxes
