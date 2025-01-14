@@ -45,7 +45,7 @@ public class DeathMenu extends Application {
         youDiedText.getStyleClass().add("you-died-text");
 
         // Play background music
-        SoundController.playBackgroundMusic(DEATH_SOUND);
+        SoundController.playDeathSound(DEATH_SOUND);
 
         Text scoreText = new Text("Score: " + score);
         scoreText.getStyleClass().addAll("content-text", "center-aligned");
