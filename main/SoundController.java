@@ -8,6 +8,7 @@ public class SoundController {
 
     private static AudioClip backgroundMusic;
     private static AudioClip menuSelectSound;
+    private static AudioClip deathSound;
 
     // Play the background music
     public static void playBackgroundMusic(String musicFilePath) {
@@ -15,6 +16,15 @@ public class SoundController {
             backgroundMusic = new AudioClip(Objects.requireNonNull(SoundController.class.getResource(musicFilePath)).toString());
             backgroundMusic.setCycleCount(AudioClip.INDEFINITE); // Loop indefinitely
             backgroundMusic.play();
+        }
+    }
+
+    //Play death sound
+    public static void playDeathSound(String musicFilePath) {
+        if (deathSound == null || !deathSound.isPlaying()) {
+            deathSound = new AudioClip(Objects.requireNonNull(SoundController.class.getResource(musicFilePath)).toString());
+            deathSound.setCycleCount(1); // NO LOOP
+            deathSound.play();
         }
     }
 
@@ -28,7 +38,7 @@ public class SoundController {
     public static void playMenuSelectSound(String soundFilePath){
         if (menuSelectSound == null || !menuSelectSound.isPlaying()) {
             menuSelectSound = new AudioClip(Objects.requireNonNull(SoundController.class.getResource(soundFilePath)).toString());
-            menuSelectSound.setCycleCount(1);
+            menuSelectSound.setCycleCount(1); // NO LOOP
             menuSelectSound.play();
         }
     }

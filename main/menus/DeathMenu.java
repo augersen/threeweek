@@ -20,15 +20,14 @@ import java.util.Objects;
 public class DeathMenu extends Application {
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
+    private static final String DEATH_SOUND = "/main/resources/sounds/Death.wav";
+
     private int score;
 
     public DeathMenu(int score) {
         this.score = score;
     }
 
-    public DeathMenu() {
-        this.score = 0;
-    }
 
     public static void main(String[] args) {
         launch(args);
@@ -45,6 +44,9 @@ public class DeathMenu extends Application {
         Text youDiedText = new Text("YOU DIED");
         youDiedText.getStyleClass().add("you-died-text");
 
+        // Play background music
+        SoundController.playBackgroundMusic(DEATH_SOUND);
+
         Text scoreText = new Text("Score: " + score);
         scoreText.getStyleClass().addAll("content-text", "center-aligned");
 
@@ -54,10 +56,10 @@ public class DeathMenu extends Application {
         root.setStyle("-fx-background-color: black;");
 
         //fade-in effect for YOU DIED
-        fadeInEffect(root, 2);
+        fadeInEffect(youDiedText, 5);
 
         //fade-in effect for score
-        fadeInEffect(scoreText, 4);
+        fadeInEffect(scoreText, 7);
 
         // Start Button
         Button playAgainButton = new Button("Play again!");
@@ -89,10 +91,10 @@ public class DeathMenu extends Application {
         });
 
         //fade-in effect for score
-        fadeInEffect(playAgainButton, 6);
+        fadeInEffect(playAgainButton, 9);
 
         //fade-in effect for score
-        fadeInEffect(backButton, 6);
+        fadeInEffect(backButton, 9);
 
         // Layout
         VBox menu = new VBox();
