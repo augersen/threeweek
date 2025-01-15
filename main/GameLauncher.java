@@ -12,6 +12,8 @@ public class GameLauncher extends Application {
 
     //SHOUTOUT TIL MOOLERIAN STACKOVERFLOW
     private static Stage gameStage; // Reference to the game stage
+    Modifiers modifiers = Modifiers.getInstance();
+
 
     @Override
     public void start(Stage primaryStage) {

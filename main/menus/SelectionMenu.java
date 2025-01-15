@@ -17,9 +17,14 @@ import java.util.Objects;
 
 public class SelectionMenu extends Application {
 
-    Modifiers modifiers = new Modifiers();
+    Modifiers modifiers = Modifiers.getInstance();
+
 
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
+
+    public SelectionMenu(Modifiers modifiers) {
+        this.modifiers = modifiers;
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -27,7 +32,7 @@ public class SelectionMenu extends Application {
 
         // Modifier names
         String[] modifierNames = {
-                "Test", "Platform Increase difficulty", "Powerups", "4", "5", "6"
+                "Test", "Platform Increase difficulty", "Powerups", "4",
         };
 
         // Title
@@ -52,7 +57,7 @@ public class SelectionMenu extends Application {
         // Checkboxes
         VBox checkboxRow = new VBox(20);
         checkboxRow.getStyleClass().add("center-aligned");
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 4; i++) {
             CheckBox checkBox = new CheckBox(modifierNames[i - 1]);
             checkBox.getStyleClass().add("check-box");
             checkboxRow.getChildren().add(checkBox);
@@ -66,8 +71,6 @@ public class SelectionMenu extends Application {
                         case 2 -> modifiers.platformModifier();
                         case 3 -> modifiers.powerupModifier();
                         case 4 -> System.out.println(3);
-                        case 5 -> System.out.println(4);
-                        case 6 -> System.out.println(5);
                         default -> System.out.println("Unknown modifier activated");
                     }
                 } else {
@@ -76,8 +79,6 @@ public class SelectionMenu extends Application {
                         case 2 -> modifiers.platformDisableModifier();
                         case 3 -> modifiers.powerupDisableModifier();
                         case 4 -> System.out.println(3);
-                        case 5 -> System.out.println(2);
-                        case 6 -> System.out.println(1);
                         default -> System.out.println("Unknown modifier deactivated");
                     }
                 }

@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Config;
+import main.Modifiers;
 import main.SoundController;
 
 import java.util.Objects;
@@ -19,6 +20,8 @@ public class StartMenu extends Application {
 
     private static final String BACKGROUND_MUSIC = "/main/resources/sounds/menuMusic.wav";
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
+    Modifiers modifiers = Modifiers.getInstance();
+
 
     @Override
     public void start(Stage primaryStage) {
@@ -52,7 +55,7 @@ public class StartMenu extends Application {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
             System.out.println("Selection Menu");
             try {
-                SelectionMenu selectionMenu = new SelectionMenu();
+                SelectionMenu selectionMenu = new SelectionMenu(modifiers);
                 selectionMenu.start(primaryStage);
             } catch (Exception ex) {
                 System.out.println("An error occurred while opening SelectionMenu");

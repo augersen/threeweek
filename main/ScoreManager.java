@@ -4,35 +4,48 @@ import java.io.*;
 import java.util.*;
 
 public class ScoreManager {
-    private static final String FILE_PATH = "scores.txt";
+    private static final String DEFAULT_FILE_PATH = "scores.txt";
 
-    // Reads scores
-    public static List<Integer> readScores() {
+    // Get the file path based on the current modifier
+    private static String getFilePath(String modifier) {
+        return modifier.equals("NoModifier") ? DEFAULT_FILE_PATH : modifier + "_scores.txt";
+    }
+
+    // Reads scores from the appropriate file
+    public static List<Integer> readScores(String modifier) {
         List<Integer> scores = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File(FILE_PATH))) {
+        String filePath = getFilePath(modifier);
+
+        try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
-                if (!line.isEmpty()) { // Skip empty lines
+                if (!line.isEmpty()) {
                     try {
                         scores.add(Integer.parseInt(line));
                     } catch (NumberFormatException e) {
-                        System.err.println("Invalid score in file: " + line); // Log invalid entries - had trouble with whitespace
+                        System.err.println("Invalid score in file: " + line);
                     }
                 }
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("No scores file found for " + modifier + ". A new one will be created.");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        scores.sort(Comparator.reverseOrder()); // Sort scores in descending order
+
+        scores.sort(Comparator.reverseOrder());
         return scores;
     }
 
-    // Saves a new score and ensures the file contains only the top 3 scores, with no duplicates
-    public static void saveScore(int score) {
-        // Read existing scores
-        List<Integer> scores = readScores();
+    // Saves a new score to the appropriate file
+    public static void saveScore(String modifier, int score) {
+        String filePath = getFilePath(modifier);
+        System.out.println("Saving score to file: " + filePath); // Debug log
 
-        // Scores get added only if they don't exist - So the whole leaderboard isn't filled with the same 1
+        // Read existing scores
+        List<Integer> scores = readScores(modifier);
+
+        // Add score only if it doesn't already exist
         if (!scores.contains(score)) {
             scores.add(score);
         }
@@ -46,7 +59,7 @@ public class ScoreManager {
         }
 
         // Save the updated scores back to the file
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+        try (FileWriter writer = new FileWriter(filePath)) {
             for (int s : scores) {
                 writer.write(s + "\n");
             }
@@ -55,5 +68,3 @@ public class ScoreManager {
         }
     }
 }
-
-

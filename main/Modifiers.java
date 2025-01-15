@@ -2,26 +2,48 @@ package main;
 
 public class Modifiers {
 
-    public Modifiers() {
+    private static Modifiers instance;
+
+
+    //
+    private Modifiers() {}
+
+    // Get the single instance of Modifiers - This will allow the modifiers to remain active until reset
+    public static Modifiers getInstance() {
+        if (instance == null) {
+            instance = new Modifiers();
+        }
+        return instance;
     }
 
-    //Test modifiers
+    // Reset the state of all modifiers
+    public void reset() {
+        Config.EXAMPLE_MODIFIER_ENABLED = false;
+        Config.PLATFORM_MODIFIER_ENABLED = false;
+        System.out.println("Modifiers reset to default state.");
+    }
+
+    // Enable/disable ExampleModifier
     public void exampleModifier() {
-        System.out.println("Example modifier");
+        Config.EXAMPLE_MODIFIER_ENABLED = true;
+        System.out.println("Example modifier enabled");
     }
+
     public void disableExampleModifier() {
-        System.out.println("Disable example modifier");
+        Config.EXAMPLE_MODIFIER_ENABLED = false;
+        System.out.println("Example modifier disabled");
     }
 
 
-    //modfications to platform
+    // Enable/disable PlatformModifier
     public void platformModifier() {
-        System.out.println("Platform modifier");
+        Config.PLATFORM_MODIFIER_ENABLED = true;
         Config.PLATFORM_SPEED += 6;
         Config.PLATFORM_WIDTH -= 50;
     }
+
     public void platformDisableModifier() {
-        System.out.println("Platform modifier disabled");
+        Config.PLATFORM_MODIFIER_ENABLED = false;
         Config.PLATFORM_SPEED -= 6;
         Config.PLATFORM_WIDTH += 50;
     }
@@ -34,5 +56,22 @@ public class Modifiers {
     public void powerupDisableModifier(){
         System.out.println("Powerup modifier disabled");
         Config.POWERUPS_ENABLED = false;
+    }
+
+    // Get current active modifiers as a string
+    public String getCurrentModifier() {
+        StringBuilder currentModifier = new StringBuilder();
+
+        if (Config.EXAMPLE_MODIFIER_ENABLED) {
+            currentModifier.append("ExampleModifier");
+        }
+        if (Config.PLATFORM_MODIFIER_ENABLED) {
+            currentModifier.append("PlatformModifier");
+        }
+        if (Config.POWERUPS_ENABLED) {
+            currentModifier.append("PowerupModifier");
+        }
+
+        return currentModifier.length() > 0 ? currentModifier.toString() : "NoModifier";
     }
 }

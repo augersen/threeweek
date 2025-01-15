@@ -18,5 +18,9 @@ public class Config {
     public static int PLATFORM_SPEED = 6;
     public static int BALL_RADIUS = 25;
     public static int PLATFORM_WIDTH = 100;
+
+    //modifierstates
     public static boolean POWERUPS_ENABLED = false;
+    public static boolean PLATFORM_MODIFIER_ENABLED = false;
+    public static boolean EXAMPLE_MODIFIER_ENABLED = false;
 }

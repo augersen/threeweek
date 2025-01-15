@@ -10,10 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import main.Config;
-import main.GameLauncher;
-import main.ScoreManager;
-import main.SoundController;
+import main.*;
 
 import java.util.Objects;
 
@@ -28,13 +25,18 @@ public class DeathMenu extends Application {
         this.score = score;
     }
 
+    Modifiers modifiers = Modifiers.getInstance();
+
+
 
     public static void main(String[] args) {
         launch(args);
     }
 
+
     private void saveScoreToManager(int score) {
-        ScoreManager.saveScore(score);
+        System.out.println("Current Modifier: " + modifiers.getCurrentModifier()); // Debug log
+        ScoreManager.saveScore(modifiers.getCurrentModifier(), score);
     }
 
     @Override
@@ -74,6 +76,7 @@ public class DeathMenu extends Application {
         playAgainButton.getStyleClass().add("start-button");
         playAgainButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
+            Modifiers.getInstance().reset();
             SoundController.stopBackgroundMusic();
             try {
                 new GameLauncher().start(new Stage()); // Launch the game
@@ -89,6 +92,7 @@ public class DeathMenu extends Application {
         backButton.getStyleClass().add("default-button");
         backButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
+            Modifiers.getInstance().reset();
             try {
                 StartMenu mainMenu = new StartMenu();
                 mainMenu.start(primaryStage);
