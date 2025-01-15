@@ -32,7 +32,7 @@ public class SelectionMenu extends Application {
 
         // Modifier names
         String[] modifierNames = {
-                "Test", "Platform Increase difficulty", "Powerups", "4",
+                "Test", "Platform Increase difficulty", "Powerups", "Placeholder",
         };
 
         // Title
@@ -78,7 +78,7 @@ public class SelectionMenu extends Application {
                         case 1 -> modifiers.disableExampleModifier();
                         case 2 -> modifiers.platformDisableModifier();
                         case 3 -> modifiers.powerupDisableModifier();
-                        case 4 -> modifiers.placeholderModifier();
+                        case 4 -> modifiers.placeholderDisableModifier();
                         default -> System.out.println("Unknown modifier deactivated");
                     }
                 }

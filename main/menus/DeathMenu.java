@@ -76,7 +76,6 @@ public class DeathMenu extends Application {
         playAgainButton.getStyleClass().add("start-button");
         playAgainButton.setOnAction(e -> {
             SoundController.playMenuSelectSound(SELECTION_SOUND);
-            Modifiers.getInstance().reset();
             SoundController.stopBackgroundMusic();
             try {
                 new GameLauncher().start(new Stage()); // Launch the game

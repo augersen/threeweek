@@ -19,7 +19,13 @@ public class Modifiers {
     // Reset the state of all modifiers
     public void reset() {
         Config.EXAMPLE_MODIFIER_ENABLED = false;
+        disableExampleModifier();
         Config.PLATFORM_MODIFIER_ENABLED = false;
+        platformDisableModifier();
+        Config.POWERUPS_ENABLED = false;
+        powerupDisableModifier();
+        Config.PLACEHOLDER_ENABLED = false;
+        placeholderDisableModifier();
         System.out.println("Modifiers reset to default state.");
     }
 
