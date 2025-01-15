@@ -41,10 +41,10 @@ public class View2D extends JPanel implements Runnable{
         this.setFocusable(true);
 
         //setup platform
-        platform.setSizes(100,25);
+        platform.setSizes(Config.PLATFORM_WIDTH,25);
         platform.setPosition(Config.SCREEN_WIDTH/2 - platform.getSizeX()/2,(int)(Config.SCREEN_HEIGHT * 0.75));
         platform.setColor(Color.orange);
-        platform.setSpeed(6);
+        platform.setSpeed(Config.PLATFORM_SPEED);
 
         //setup ball
         ball.setSizes(25);
@@ -90,7 +90,6 @@ public class View2D extends JPanel implements Runnable{
             if(!ball.isLive()){
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
-                //TODO AAAAAAAAAAAAAAAAAAH JEG KAN IKKE FÅ DEATHSCREEN TIL AT VISE PÅ EN SMOOTH MÅDE!!! kh jeff
                 showDeathScreen();
                 return;
 

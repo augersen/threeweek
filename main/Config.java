@@ -13,4 +13,9 @@ public class Config {
     public static final int FPS = 60;
     public static final int BRICK_HEIGHT = 8;
     public static final int BRICK_LENGTH = 14;
+
+    //Game Modifiers
+    public static int PLATFORM_SPEED = 6;
+    public static int BALL_RADIUS = 25;
+    public static int PLATFORM_WIDTH = 100;
 }

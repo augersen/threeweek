@@ -10,17 +10,25 @@ import javafx.stage.Stage;
 
 import main.Config;
 import main.GameLauncher;
+import main.Modifiers;
 import main.SoundController;
 
 import java.util.Objects;
 
 public class SelectionMenu extends Application {
 
+    Modifiers modifiers = new Modifiers();
+
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
 
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Breakout");
+
+        // Modifier names
+        String[] modifierNames = {
+                "Test", "Platform Increase difficulty", "3", "4", "5", "6"
+        };
 
         // Title
         Text title = new Text("Select your modifiers!");
@@ -45,16 +53,17 @@ public class SelectionMenu extends Application {
         VBox checkboxRow = new VBox(20);
         checkboxRow.getStyleClass().add("center-aligned");
         for (int i = 1; i <= 6; i++) {
-            CheckBox checkBox = new CheckBox("Modifier: " + i);
+            CheckBox checkBox = new CheckBox(modifierNames[i - 1]);
             checkBox.getStyleClass().add("check-box");
             checkboxRow.getChildren().add(checkBox);
+
 
             int finalI = i;
             checkBox.setOnAction(e -> {
                 if (checkBox.isSelected()) {
                     switch (finalI) {
-                        case 1 -> exampleModifier();
-                        case 2 -> System.out.println(1);
+                        case 1 -> modifiers.exampleModifier();
+                        case 2 -> modifiers.platformModifier();
                         case 3 -> System.out.println(2);
                         case 4 -> System.out.println(3);
                         case 5 -> System.out.println(4);
@@ -63,8 +72,8 @@ public class SelectionMenu extends Application {
                     }
                 } else {
                     switch (finalI) {
-                        case 1 -> disableExampleModifier();
-                        case 2 -> System.out.println(5);
+                        case 1 -> modifiers.disableExampleModifier();
+                        case 2 -> modifiers.platformDisableModifier();
                         case 3 -> System.out.println(4);
                         case 4 -> System.out.println(3);
                         case 5 -> System.out.println(2);
@@ -101,13 +110,6 @@ public class SelectionMenu extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    public void exampleModifier() {
-        System.out.println("Example modifier");
-    }
-    public void disableExampleModifier() {
-        System.out.println("Disable example modifier");
     }
 
 }
