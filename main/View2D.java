@@ -1,5 +1,7 @@
 package main;
 
+import java.util.*;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,11 +10,7 @@ import java.awt.Graphics2D;
 import javax.swing.*;
 
 import javafx.stage.Stage;
-import main.Model.Ball;
-import main.Model.Brick;
-import main.Model.Model;
-import main.Model.Platform;
-import main.Model.Sound;
+import main.Model.*;
 import main.menus.DeathMenu;
 
 public class View2D extends JPanel implements Runnable{
@@ -26,7 +24,9 @@ public class View2D extends JPanel implements Runnable{
 
     // Initiate Entities
     Platform platform = new Platform();
-    Ball ball = new Ball();
+    AugustArray objects = new AugustArray();
+
+
     Model model;
     Sound sound = new Sound();
     int score = 0;
@@ -47,9 +47,9 @@ public class View2D extends JPanel implements Runnable{
         platform.setSpeed(Config.PLATFORM_SPEED);
 
         //setup ball
-        ball.setSizes(25);
-        ball.setPosition(Config.SCREEN_WIDTH/2 - ball.getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
-        ball.setColor(Color.pink);
+        objects.balls[0].setSizes(25);
+        objects.balls[0].setPosition(Config.SCREEN_WIDTH/2 - objects.balls[0].getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
+        objects.balls[0].setColor(Color.pink);
 
         //setup model
         model = new Model(height, length);
@@ -87,7 +87,7 @@ public class View2D extends JPanel implements Runnable{
             update();
 
             //Refactor to work with multiple balls
-            if(!ball.isLive()){
+            if(!objects.balls[0].isLive()){
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
                 showDeathScreen();
@@ -119,9 +119,10 @@ public class View2D extends JPanel implements Runnable{
     //Method for calling every entities update, as well as collecting keyboard inputs.
     public void update() {
         //Checks if 'a' is pressed. Platform goes left if a is pressed, goes right even faster if shift is also pressed.
-        //Starts ball if ball hasn't been started.
+        //Starts balls[0] if balls[0] hasn't been started.
         if(keyH.aPressed){
-            if(!ball.isStarted()){ball.setVectorX(-ball.getSpeed()); ball.setVectorY(-ball.getSpeed()); ball.start();}
+            if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(-objects.balls[0].getSpeed());
+                objects.balls[0].setVectorY(-objects.balls[0].getSpeed()); objects.balls[0].start();}
             if(keyH.shiftPressed){
                 platform.setX(platform.getX()- platform.getSpeed()*2);
             } else {
@@ -131,9 +132,10 @@ public class View2D extends JPanel implements Runnable{
         }
 
         //Checks if 'd' is pressed. Platform goes right if d is pressed, goes right even faster if shift is also pressed.
-        //Starts ball if ball hasn't been started.
+        //Starts balls[0] if balls[0] hasn't been started.
         if(keyH.dPressed){
-            if(!ball.isStarted()){ball.setVectorX(ball.getSpeed()); ball.setVectorY(-ball.getSpeed()); ball.start();}
+            if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(objects.balls[0].getSpeed());
+                objects.balls[0].setVectorY(-objects.balls[0].getSpeed()); objects.balls[0].start();}
             if(keyH.shiftPressed){
                 platform.setX(platform.getX()+ platform.getSpeed()*2);
             } else {
@@ -143,7 +145,10 @@ public class View2D extends JPanel implements Runnable{
         platform.collision(Config.SCREEN_WIDTH);
 
         //Refactor ball code to allow multiple balls later on!
-        score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, platform, model.bricks, sound);
+        for(Ball ball : objects.balls){
+            score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, platform, model.bricks, sound);
+        }
+
 
     }
 
@@ -160,8 +165,10 @@ public class View2D extends JPanel implements Runnable{
         g2.setColor(Color.black);
         g2.drawString(this.score + "", platform.getX(),platform.getY()+platform.getSizeY()/2);
 
+        for(Ball ball : objects.balls){
         g2.setColor(ball.getColor());
         g2.fillOval(ball.getX(),ball.getY(),ball.getRadius(),ball.getRadius());
+        }
 
         for(Brick[] brickList : model.bricks){
             for(Brick brick : brickList){

@@ -21,7 +21,8 @@ public class Ball extends Entity {
         this.vectorY = 0;
         this.speed = 8;
         this.live = true;
-        this.started = false;
+        this.started = started;
+
     }
 
     //Sets size (singular instead of plural, as a ball only has a radius, not an x and y)

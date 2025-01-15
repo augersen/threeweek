@@ -13,6 +13,7 @@ public class Modifiers {
         System.out.println("Disable example modifier");
     }
 
+
     //modfications to platform
     public void platformModifier() {
         System.out.println("Platform modifier");
@@ -23,5 +24,15 @@ public class Modifiers {
         System.out.println("Platform modifier disabled");
         Config.PLATFORM_SPEED -= 6;
         Config.PLATFORM_WIDTH += 50;
+    }
+
+    public void powerupModifier(){
+        System.out.println("Powerup modifier");
+        Config.POWERUPS_ENABLED = true;
+    }
+
+    public void powerupDisableModifier(){
+        System.out.println("Powerup modifier disabled");
+        Config.POWERUPS_ENABLED = false;
     }
 }

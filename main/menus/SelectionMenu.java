@@ -27,7 +27,7 @@ public class SelectionMenu extends Application {
 
         // Modifier names
         String[] modifierNames = {
-                "Test", "Platform Increase difficulty", "3", "4", "5", "6"
+                "Test", "Platform Increase difficulty", "Powerups", "4", "5", "6"
         };
 
         // Title
@@ -64,7 +64,7 @@ public class SelectionMenu extends Application {
                     switch (finalI) {
                         case 1 -> modifiers.exampleModifier();
                         case 2 -> modifiers.platformModifier();
-                        case 3 -> System.out.println(2);
+                        case 3 -> modifiers.powerupModifier();
                         case 4 -> System.out.println(3);
                         case 5 -> System.out.println(4);
                         case 6 -> System.out.println(5);
@@ -74,7 +74,7 @@ public class SelectionMenu extends Application {
                     switch (finalI) {
                         case 1 -> modifiers.disableExampleModifier();
                         case 2 -> modifiers.platformDisableModifier();
-                        case 3 -> System.out.println(4);
+                        case 3 -> modifiers.powerupDisableModifier();
                         case 4 -> System.out.println(3);
                         case 5 -> System.out.println(2);
                         case 6 -> System.out.println(1);
