@@ -70,7 +70,7 @@ public class SelectionMenu extends Application {
                         case 1 -> modifiers.exampleModifier();
                         case 2 -> modifiers.platformModifier();
                         case 3 -> modifiers.powerupModifier();
-                        case 4 -> System.out.println(3);
+                        case 4 -> modifiers.placeholderModifier();
                         default -> System.out.println("Unknown modifier activated");
                     }
                 } else {
@@ -78,7 +78,7 @@ public class SelectionMenu extends Application {
                         case 1 -> modifiers.disableExampleModifier();
                         case 2 -> modifiers.platformDisableModifier();
                         case 3 -> modifiers.powerupDisableModifier();
-                        case 4 -> System.out.println(3);
+                        case 4 -> modifiers.placeholderModifier();
                         default -> System.out.println("Unknown modifier deactivated");
                     }
                 }

@@ -43,10 +43,4 @@ public class SoundController {
         }
     }
 
-    // TODO: VIRKER IKKE
-    public static void setVolume(double volume) {
-        if (backgroundMusic != null) {
-            backgroundMusic.setVolume(Math.max(0.0, Math.min(1.0, volume))); // Clamp volume between 0.0 and 1.0
-        }
-    }
 }

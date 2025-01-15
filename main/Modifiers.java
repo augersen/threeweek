@@ -64,6 +64,10 @@ public class Modifiers {
         System.out.println("Placeholder modifier");
         Config.PLACEHOLDER_ENABLED = true;
     }
+    public void placeholderDisableModifier(){
+        System.out.println("Placeholder modifier disabled");
+        Config.PLACEHOLDER_ENABLED = false;
+    }
 
     // Get current active modifiers as a string
     public String getCurrentModifier() {
