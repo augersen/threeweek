@@ -53,6 +53,9 @@ public class HighscoresMenu extends Application {
         // Load and display scores for third modifier
         addHighscoreSection(highscoreSections, "Best performances with PowerupModifier!", "PowerupModifier");
 
+        // Load and display scores for third modifier
+        addHighscoreSection(highscoreSections, "Best performances with PlaceholderModifier!", "PlaceholderModifier");
+
         // Back Button
         Button backButton = new Button("Back to Menu");
         backButton.setOnAction(e -> {

@@ -23,4 +23,5 @@ public class Config {
     public static boolean POWERUPS_ENABLED = false;
     public static boolean PLATFORM_MODIFIER_ENABLED = false;
     public static boolean EXAMPLE_MODIFIER_ENABLED = false;
+    public static boolean PLACEHOLDER_ENABLED = false;
 }

@@ -48,6 +48,7 @@ public class Modifiers {
         Config.PLATFORM_WIDTH += 50;
     }
 
+    //Enable/disable powerupmodifier
     public void powerupModifier(){
         System.out.println("Powerup modifier");
         Config.POWERUPS_ENABLED = true;
@@ -56,6 +57,12 @@ public class Modifiers {
     public void powerupDisableModifier(){
         System.out.println("Powerup modifier disabled");
         Config.POWERUPS_ENABLED = false;
+    }
+
+    //Enable/disbale placeholderModifier
+    public void placeholderModifier(){
+        System.out.println("Placeholder modifier");
+        Config.PLACEHOLDER_ENABLED = true;
     }
 
     // Get current active modifiers as a string
@@ -70,6 +77,9 @@ public class Modifiers {
         }
         if (Config.POWERUPS_ENABLED) {
             currentModifier.append("PowerupModifier");
+        }
+        if (Config.PLACEHOLDER_ENABLED) {
+            currentModifier.append("PlaceholderModifier");
         }
 
         return currentModifier.length() > 0 ? currentModifier.toString() : "NoModifier";
