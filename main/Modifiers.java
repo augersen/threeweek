@@ -20,10 +20,16 @@ public class Modifiers {
 
     // Reset the state of all modifiers
     public void reset() {
-        if (!Objects.equals(getCurrentModifier(), "NoModifier")) {
+        if (Config.EXAMPLE_MODIFIER_ENABLED) {
             disableExampleModifier();
+        }
+        if (Config.PLATFORM_MODIFIER_ENABLED) {
             platformDisableModifier();
+        }
+        if (Config.POWERUPS_ENABLED) {
             powerupDisableModifier();
+        }
+        if (Config.PLACEHOLDER_ENABLED) {
             placeholderDisableModifier();
         }
 
