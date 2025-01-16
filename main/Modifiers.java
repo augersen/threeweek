@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Objects;
+
 public class Modifiers {
 
     private static Modifiers instance;
@@ -18,14 +20,17 @@ public class Modifiers {
 
     // Reset the state of all modifiers
     public void reset() {
+        if (!Objects.equals(getCurrentModifier(), "NoModifier")) {
+            disableExampleModifier();
+            platformDisableModifier();
+            powerupDisableModifier();
+            placeholderDisableModifier();
+        }
+
         Config.EXAMPLE_MODIFIER_ENABLED = false;
-        disableExampleModifier();
         Config.PLATFORM_MODIFIER_ENABLED = false;
-        platformDisableModifier();
         Config.POWERUPS_ENABLED = false;
-        powerupDisableModifier();
         Config.PLACEHOLDER_ENABLED = false;
-        placeholderDisableModifier();
         System.out.println("Modifiers reset to default state.");
     }
 
