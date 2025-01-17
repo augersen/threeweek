@@ -140,9 +140,9 @@ public class View2D extends JPanel implements Runnable{
 
     //Method for calling every entities update, as well as collecting keyboard inputs.
     public void update() {
-        //Checks if 'a' is pressed. Platform goes left if a is pressed, goes right even faster if shift is also pressed.
+        //Checks if 'a' or left arrow is pressed. Platform goes left if a is pressed, goes right even faster if shift is also pressed.
         //Starts balls[0] if balls[0] hasn't been started.
-        if(keyH.aPressed){
+        if(keyH.aPressed || keyH.leftArrowPressed){
             if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(-objects.balls[0].getSpeed());
                 objects.balls[0].setVectorY(-objects.balls[0].getSpeed()); objects.balls[0].start();}
             if(keyH.shiftPressed){
@@ -153,9 +153,9 @@ public class View2D extends JPanel implements Runnable{
 
         }
 
-        //Checks if 'd' is pressed. Platform goes right if d is pressed, goes right even faster if shift is also pressed.
+        //Checks if 'd' or right arrow is pressed. Platform goes right if d is pressed, goes right even faster if shift is also pressed.
         //Starts balls[0] if balls[0] hasn't been started.
-        if(keyH.dPressed){
+        if(keyH.dPressed || keyH.rightArrowPressed){
             if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(objects.balls[0].getSpeed());
                 objects.balls[0].setVectorY(-objects.balls[0].getSpeed()); objects.balls[0].start();}
             if(keyH.shiftPressed){

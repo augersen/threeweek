@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 
 
 public class Controller implements KeyListener{
-    public boolean aPressed,dPressed, shiftPressed;
+    public boolean aPressed,dPressed, shiftPressed, leftArrowPressed, rightArrowPressed;
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -23,19 +23,30 @@ public class Controller implements KeyListener{
         if(code == KeyEvent.VK_SHIFT){
             this.shiftPressed = true;
         }
+        if (code == KeyEvent.VK_LEFT) {
+            this.leftArrowPressed = true;
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            this.rightArrowPressed = true;
+        }
     }
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         if(code == KeyEvent.VK_A){
             this.aPressed = false;
-
         }
         if(code == KeyEvent.VK_D){
             this.dPressed = false;
         }
         if(code == KeyEvent.VK_SHIFT){
             this.shiftPressed = false;
+        }
+        if (code == KeyEvent.VK_LEFT) {
+            this.leftArrowPressed = false;
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            this.rightArrowPressed = false;
         }
     }
     @Override
