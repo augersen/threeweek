@@ -231,6 +231,8 @@ public class View2D extends JPanel implements Runnable{
         }
 
         for(Powerup powerup : objects.powerups) {
+            g2.setColor(Color.white);
+            g2.fillOval(powerup.getX()-2,powerup.getY()-2, powerup.getSizeX()+4, powerup.getSizeY()+4);
             g2.setColor(powerup.getColor());
             g2.fillOval(powerup.getX(),powerup.getY(), powerup.getSizeX(), powerup.getSizeY());
         }
@@ -286,15 +288,14 @@ public class View2D extends JPanel implements Runnable{
             //Adds ball
             case 2:
                 Random rn = new Random();
-                int direction = rn.nextInt(4);
+                int direction = rn.nextInt(2);
                 objects.addBall(new Ball());
                 objects.balls[objects.ballCount()-1].setSizes(20);
                 objects.balls[objects.ballCount()-1].setPosition(platform.getX() + platform.getSizeX() - objects.balls[0].getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
                 objects.balls[objects.ballCount()-1].setColor(Color.orange);
                 objects.balls[objects.ballCount()-1].setVectorX((-1 * direction) * objects.balls[objects.ballCount()-1].getSpeed());
                 objects.balls[objects.ballCount()-1].setVectorY(objects.balls[objects.ballCount()-1].getSpeed());
-                if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(objects.balls[0].getSpeed());
-                    objects.balls[0].setVectorY(-objects.balls[0].getSpeed()); objects.balls[0].start();}
+
                 break;
             //Sets ball aflame so it cuts through
             case 1:
