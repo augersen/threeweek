@@ -361,7 +361,7 @@ public class View2D extends JPanel implements Runnable{
                 objects.balls[objects.ballCount()-1].setSizes(20);
                 objects.balls[objects.ballCount()-1].setPosition(platform.getX() + platform.getSizeX() - objects.balls[0].getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
                 objects.balls[objects.ballCount()-1].setColor(Color.orange);
-                objects.balls[objects.ballCount()-1].setVectorX((-1 * direction) * objects.balls[objects.ballCount()-1].getSpeed());
+                objects.balls[objects.ballCount()-1].setVectorX((direction == 0 ? -1 : 1) * objects.balls[objects.ballCount()-1].getSpeed());
                 objects.balls[objects.ballCount()-1].setVectorY(objects.balls[objects.ballCount()-1].getSpeed());
 
                 break;
