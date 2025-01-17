@@ -22,11 +22,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BattlepassMenu extends Application {
-
+    
     private static final String SELECTION_SOUND = "/main/resources/sounds/menuSelectSound.wav";
     private static final String AWARD_SELECT = "/main/resources/sounds/fanfare.wav";
 
     private StackPane root;
+
+    public static String battlepassConfig = "NothingApplied";
 
     @Override
     public void start(Stage primaryStage) {
@@ -142,10 +144,12 @@ public class BattlepassMenu extends Application {
     private void unlockFeature1() {
         System.out.println("award 1");
         showPopUp("Congratulations on unlocking Musk!");
+        battlepassConfig = "Battlepass1";
     }
 
     private void unlockFeature2() {
         System.out.println("award 2");
         showPopUp("Congratulations on unlocking Lion!");
+        battlepassConfig = "Battlepass2";
     }
 }

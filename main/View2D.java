@@ -8,14 +8,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.*;
-
 import javafx.stage.Stage;
 import main.Model.*;
+import main.menus.BattlepassMenu;
 import main.menus.DeathMenu;
 
 public class View2D extends JPanel implements Runnable{
 
     private Stage gameStage;
+    private java.awt.Image ballImage; 
+    private java.awt.Image backgroundImage; 
 
     int FPS = Config.FPS;
 
@@ -39,6 +41,26 @@ public class View2D extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        // Battlepass modifiers
+        switch (BattlepassMenu.battlepassConfig) {
+            case "Battlepass1":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass2":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break;
+            case "battlepass3":
+                ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            default:
+                ballImage = new ImageIcon("main/resources/images/pink-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/black-bg.jpg").getImage();
+                break;
+        }
 
         //setup platform
         platform.setSizes(Config.PLATFORM_WIDTH,25);
@@ -154,31 +176,45 @@ public class View2D extends JPanel implements Runnable{
 
     //Standard method for drawing in JPanel
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D) g;
 
+        // Paint background
+        if (backgroundImage != null) {
+            g2.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+        }
+        
+        // Paint ball
         g2.setColor(platform.getColor());
         g2.fillRect(platform.getX(), platform.getY(), platform.getSizeX(), platform.getSizeY());
-
-        //MAKE PRETTY - TEXT SHOWING SCORE ON BALL
+        
+        // Write score on platform
         g2.setColor(Color.black);
-        g2.drawString(this.score + "", platform.getX(),platform.getY()+platform.getSizeY()/2);
+        g2.drawString(this.score + "", platform.getX() + 10, platform.getY() + platform.getSizeY() / 2);
 
-        for(Ball ball : objects.balls){
-        g2.setColor(ball.getColor());
-        g2.fillOval(ball.getX(),ball.getY(),ball.getRadius(),ball.getRadius());
+        // Ball as image
+        for (Ball ball : objects.balls) {
+            if (ballImage != null) {
+                g2.drawImage(ballImage, ball.getX(), ball.getY(), ball.getRadius(), ball.getRadius(), null);
+            } else {
+                // Fallback if image is not available
+                g2.setColor(ball.getColor());
+                g2.fillOval(ball.getX(), ball.getY(), ball.getRadius(), ball.getRadius());
+            }
         }
 
-        for(Brick[] brickList : model.bricks){
-            for(Brick brick : brickList){
+        // Bricks
+        for (Brick[] brickList : model.bricks) {
+            for (Brick brick : brickList) {
                 g2.setColor(brick.getColor());
-                g2.fillRect(brick.getX(),brick.getY(),brick.getSizeX(),brick.getSizeY());
+                g2.fillRect(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY());
             }
         }
 
         g2.dispose();
     }
+
 
     //method for getting score from game.
     public int getScore(){
