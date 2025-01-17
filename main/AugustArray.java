@@ -20,16 +20,24 @@ public class AugustArray {
         return balls[index];
     }
 
+    public int ballCount(){
+        return balls.length;
+    }
+
     public void setBall(int index, Ball ball){
         this.balls[index] = ball;
     }
 
     public Powerup getPowerup(int index) {
-        return powerups[index];
+        return this.powerups[index];
     }
 
     public void setPowerup(int index, Powerup powerup) {
         this.powerups[index] = powerup;
+    }
+
+    public int powerupCount(){
+        return powerups.length;
     }
 
     public void addBall(Ball value){
@@ -41,13 +49,14 @@ public class AugustArray {
         this.balls = newBalls;
     }
 
-    public void addPowerup(Powerup value){
+    public void addPowerup(Powerup powerup){
         Powerup[] newPowerups = new Powerup[this.powerups.length + 1];
         for(int i = 0; i < this.powerups.length; i++){
             newPowerups[i] = this.powerups[i];
         }
-        newPowerups[this.powerups.length] = value;
+        newPowerups[this.powerups.length] = powerup;
         this.powerups = newPowerups;
+        System.out.println("Powerup added!");
     }
 
     public void deleteBall(int index){
@@ -70,5 +79,6 @@ public class AugustArray {
             newArray[i] = this.powerups[i + 1];
         }
         this.powerups = newArray;
+        System.out.println("Powerup deleted!");
     }
 }

@@ -21,6 +21,7 @@ public class View2D extends JPanel implements Runnable{
 
     int FPS = Config.FPS;
 
+
     Controller keyH = new Controller();
     Thread gameThread;
 
@@ -32,6 +33,7 @@ public class View2D extends JPanel implements Runnable{
     Model model;
     Sound sound = new Sound();
     int score = 0;
+    int brickCount;
 
     /* Sets up the initial properties of the game panel */
     public View2D(int height, int length){
@@ -143,6 +145,7 @@ public class View2D extends JPanel implements Runnable{
 
         //setup model
         model = new Model(height, length);
+        brickCount = height * length;
 
     }
 
@@ -177,7 +180,7 @@ public class View2D extends JPanel implements Runnable{
             update();
 
             //Refactor to work with multiple balls
-            if(!objects.balls[0].isLive()){
+            if(objects.ballCount() == 0){
                 System.out.println("You dead as shit"); //Temporary
                 //Frederik Tom Kronborg Paludan aka Palu aka Jeff aka Pookie aka mynamajeff på DTI
                 showDeathScreen();
@@ -208,7 +211,8 @@ public class View2D extends JPanel implements Runnable{
 
     //Method for calling every entities update, as well as collecting keyboard inputs.
     public void update() {
-        //Checks if 'a' or left arrow is pressed. Platform goes left if a is pressed, goes right even faster if shift is also pressed.
+
+        //Checks if 'a' is pressed. Platform goes left if a is pressed, goes right even faster if shift is also pressed.
         //Starts balls[0] if balls[0] hasn't been started.
         if(keyH.aPressed || keyH.leftArrowPressed){
             if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(-objects.balls[0].getSpeed());
@@ -235,9 +239,25 @@ public class View2D extends JPanel implements Runnable{
         platform.collision(Config.SCREEN_WIDTH);
 
         //Refactor ball code to allow multiple balls later on!
-        for(Ball ball : objects.balls){
-            score += ball.update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, platform, model.bricks, sound);
+        for(int i = objects.ballCount() - 1; i >= 0; i--){
+            score += objects.getBall(i).update(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT, platform, model.bricks, sound, objects);
+
+            if(!objects.getBall(i).isLive()){
+                objects.deleteBall(i);
+            }
         }
+        //Powerup code, checks if powerup has died, or if it has hit the platform. It it hits the platform, powerup is applied.
+        for(int i = objects.powerupCount() - 1; i >= 0; i--){
+            int powerupEnable = objects.getPowerup(i).update(platform);
+
+            if(powerupEnable == 2){
+                applyPowerup(objects.getPowerup(i).getChoice());
+                objects.deletePowerup(i);
+            } else if(!objects.getPowerup(i).isLive()){
+                objects.deletePowerup(i);
+            }
+        }
+
 
 
     }
@@ -253,7 +273,13 @@ public class View2D extends JPanel implements Runnable{
             g2.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
         }
         
-        // Paint ball
+        // Paint platform
+        //If platform is flaming, add red outline.
+        if(platform.isFlaming()){
+            g2.setColor(Color.red);
+            g2.fillRect(platform.getX()-3, platform.getY()-3,platform.getSizeX()+6,platform.getSizeY()+6);
+        }
+
         g2.setColor(platform.getColor());
         g2.fillRect(platform.getX(), platform.getY(), platform.getSizeX(), platform.getSizeY());
         
@@ -272,12 +298,23 @@ public class View2D extends JPanel implements Runnable{
             }
         }
 
+        for(Powerup powerup : objects.powerups) {
+            g2.setColor(powerup.getColor());
+            g2.fillOval(powerup.getX(),powerup.getY(), powerup.getSizeX(), powerup.getSizeY());
+        }
+
         // Bricks
+        int brickCount = 0;
         for (Brick[] brickList : model.bricks) {
             for (Brick brick : brickList) {
                 g2.setColor(brick.getColor());
                 g2.fillRect(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY());
+                if(brick.isLive()){brickCount++;}
             }
+        }
+
+        if(brickCount == 0){
+            model.resetBricks();
         }
 
         g2.dispose();
@@ -310,4 +347,37 @@ public class View2D extends JPanel implements Runnable{
         this.gameStage = stage;
     }
 
+    public void applyPowerup(int option){
+        switch(option){
+            case 3:
+                System.out.println("Something sure happened!");
+            //Adds ball
+            case 2:
+                Random rn = new Random();
+                int direction = rn.nextInt(4);
+                objects.addBall(new Ball());
+                objects.balls[objects.ballCount()-1].setSizes(20);
+                objects.balls[objects.ballCount()-1].setPosition(platform.getX() + platform.getSizeX() - objects.balls[0].getRadius()/2, (int)(Config.SCREEN_HEIGHT * 0.75)- platform.getSizeY());
+                objects.balls[objects.ballCount()-1].setColor(Color.orange);
+                objects.balls[objects.ballCount()-1].setVectorX((-1 * direction) * objects.balls[objects.ballCount()-1].getSpeed());
+                objects.balls[objects.ballCount()-1].setVectorY(objects.balls[objects.ballCount()-1].getSpeed());
+                if(!objects.balls[0].isStarted()){objects.balls[0].setVectorX(objects.balls[0].getSpeed());
+                    objects.balls[0].setVectorY(-objects.balls[0].getSpeed()); objects.balls[0].start();}
+                break;
+            //Sets ball aflame so it cuts through
+            case 1:
+                platform.setAflame();
+                break;
+             //Bomb - straight up ends game, deleting all bricks.
+            case 0:
+                for(Brick[] brickList : model.bricks){
+                    for(Brick brick : brickList){
+                        brick.destroyBrick();
+
+                    }
+                }
+                break;
+
+        }
+    }
 }

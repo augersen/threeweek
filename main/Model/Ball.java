@@ -1,5 +1,10 @@
 package main.Model;
 
+import main.AugustArray;
+import main.Config;
+
+import java.util.Random;
+
 /**
  * Class for the ball object that bounces between platform and bricks.
  * Has vectorX and vectorY to describe its movement frame by frame. Collision impacts movement.
@@ -14,6 +19,7 @@ public class Ball extends Entity {
     private int radius;
     private boolean live;
     private boolean started;
+    private boolean flaming;
 
     public Ball(){
         super();
@@ -22,6 +28,7 @@ public class Ball extends Entity {
         this.speed = 8;
         this.live = true;
         this.started = started;
+        this.flaming = false;
 
     }
 
@@ -83,7 +90,7 @@ public class Ball extends Entity {
     }
 
 
-    public int update(int screenWidth, int screenHeight, Platform platform, Brick[][] bricks, Sound sound){
+    public int update(int screenWidth, int screenHeight, Platform platform, Brick[][] bricks, Sound sound, AugustArray objects){
         super.setX(this.getX() + this.vectorX);
         super.setY(this.getY() + this.vectorY);
 
@@ -110,16 +117,18 @@ public class Ball extends Entity {
         //If ball hits platform. !!! Collision needs work
         if(y < platform.getY() + platform.getSizeY() + size && y > platform.getY() - size &&
          x < platform.getX() + platform.getSizeX() + size && x > platform.getX() - size){
-            this.collision(platform.getX(), platform.getY(), platform.getSizeX(), platform.getSizeY());
+            this.collision(platform);
          }
 
         //Checks if ball is hitting a brick. Adds to score.
          for(Brick[] brickList : bricks){
             for(Brick brick : brickList){
-                if(y < brick.getY() + brick.getSizeY() + size && y > brick.getY() - size && 
-                x < brick.getX() + brick.getSizeX() + size && x > brick.getX() - size){
-                    score += this.collision(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY(), brick, sound);
-                }
+                if(y < brick.getY() + brick.getSizeY() + size && y > brick.getY() - size){
+                if(x < brick.getX() + brick.getSizeX() + size && x > brick.getX() - size){
+
+                    score += this.collision(brick.getX(), brick.getY(), brick.getSizeX(), brick.getSizeY(), brick, sound, objects);
+                }}
+                else{break;}
             }
          }
         
@@ -127,7 +136,7 @@ public class Ball extends Entity {
     }
 
     //For bricks
-    public int collision(int entityX, int entityY, int entitySizeX, int entitySizeY, Brick brick, Sound sound){
+    public int collision(int entityX, int entityY, int entitySizeX, int entitySizeY, Brick brick, Sound sound, AugustArray objects){
         int action = 0;
         int size = this.radius / 2;
         int score = 0;
@@ -148,14 +157,24 @@ public class Ball extends Entity {
                     }
         }
 
-        switch(action){
-            case 4 -> this.vectorY = -1 * Math.abs(this.vectorY);
-            case 2 -> this.vectorX = Math.abs(this.vectorX);
-            case 3 -> this.vectorX = -1 * Math.abs(this.vectorX);
-            case 1 -> this.vectorY = Math.abs(this.vectorY);
+        if(!this.flaming){
+            switch(action){
+                case 4 -> this.vectorY = -1 * Math.abs(this.vectorY);
+                case 2 -> this.vectorX = Math.abs(this.vectorX);
+                case 3 -> this.vectorX = -1 * Math.abs(this.vectorX);
+                case 1 -> this.vectorY = Math.abs(this.vectorY);
+            }
         }
 
+
         if(action != 0){
+            if(Config.POWERUPS_ENABLED){
+                Random random = new Random();
+                int choice = random.nextInt(7);
+                if(choice == 1){
+                    objects.addPowerup(new Powerup(brick.getX()+brick.getSizeX()/2,brick.getY()));
+                }
+            }
             score = brick.getScore();
             brick.destroyBrick();
             sound.playSE(2);
@@ -166,7 +185,12 @@ public class Ball extends Entity {
     }
 
     //For player entity
-    public void collision(int entityX, int entityY, int entitySizeX, int entitySizeY){
+    public void collision(Platform platform){
+
+        int entityX = platform.getX();
+        int entityY = platform.getY();
+        int entitySizeX = platform.getSizeX();
+        int entitySizeY = platform.getSizeY();
         int action = 0;
         int size = this.radius / 2;
 
@@ -198,6 +222,14 @@ public class Ball extends Entity {
             if(this.getX() < midpoint){this.vectorX = -1 * Math.abs(this.vectorX);}
             else{this.vectorX = Math.abs(this.vectorX);}
             this.vectorY = -1* Math.abs(this.vectorY);
+            //Checks if it should apply flaming
+            if(this.flaming){
+                this.flaming = false;
+            }
+            if(platform.isFlaming()){
+                this.flaming = true;
+                platform.stopFlaming();
+            }
         }
     }
 }

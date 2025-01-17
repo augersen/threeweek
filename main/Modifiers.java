@@ -29,14 +29,14 @@ public class Modifiers {
         if (Config.POWERUPS_ENABLED) {
             powerupDisableModifier();
         }
-        if (Config.PLACEHOLDER_ENABLED) {
-            placeholderDisableModifier();
+        if (Config.INFINITE_ENABLED) {
+            infiniteDisableModifier();
         }
 
         Config.EXAMPLE_MODIFIER_ENABLED = false;
         Config.PLATFORM_MODIFIER_ENABLED = false;
         Config.POWERUPS_ENABLED = false;
-        Config.PLACEHOLDER_ENABLED = false;
+        Config.INFINITE_ENABLED = false;
         System.out.println("Modifiers reset to default state.");
     }
 
@@ -76,14 +76,14 @@ public class Modifiers {
         Config.POWERUPS_ENABLED = false;
     }
 
-    //Enable/disbale placeholderModifier
-    public void placeholderModifier(){
-        System.out.println("Placeholder modifier");
-        Config.PLACEHOLDER_ENABLED = true;
+    //Enable/disbale Infinite modifier
+    public void infiniteModifier(){
+        System.out.println("Infinite modifier");
+        Config.INFINITE_ENABLED = true;
     }
-    public void placeholderDisableModifier(){
-        System.out.println("Placeholder modifier disabled");
-        Config.PLACEHOLDER_ENABLED = false;
+    public void infiniteDisableModifier(){
+        System.out.println("Infinite modifier disabled");
+        Config.INFINITE_ENABLED = false;
     }
 
     // Get current active modifiers as a string
@@ -99,8 +99,8 @@ public class Modifiers {
         if (Config.POWERUPS_ENABLED) {
             currentModifier.append("PowerupModifier");
         }
-        if (Config.PLACEHOLDER_ENABLED) {
-            currentModifier.append("PlaceholderModifier");
+        if (Config.INFINITE_ENABLED) {
+            currentModifier.append("InfiniteModifier");
         }
 
         return currentModifier.length() > 0 ? currentModifier.toString() : "NoModifier";

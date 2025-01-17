@@ -1,5 +1,7 @@
 package main.Model;
 
+import main.Config;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.Dimension;
@@ -124,6 +126,13 @@ public class Model {
         return sum;
     }
 
+    public void resetBricks(){
+        for(Brick[] brickList : this.bricks){
+            for(Brick brick : brickList){
+                brick.setX(brick.getX() + Config.SCREEN_WIDTH);
+            }
+        }
+    }
     //Gets current score
     public int getScore(){
         return this.score;
