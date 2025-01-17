@@ -5,6 +5,7 @@ package main.Model;
  */
 public class Platform extends Entity {
     private int speed;
+    private boolean flaming;
 
     public Platform(){
         super();
@@ -15,6 +16,17 @@ public class Platform extends Entity {
         return this.speed;
     }
 
+    public boolean isFlaming(){
+        return this.flaming;
+    }
+
+    public void setAflame(){
+        this.flaming = true;
+    }
+
+    public void stopFlaming(){
+        this.flaming = false;
+    }
 
     //Sets speed
     public void setSpeed(int speed){

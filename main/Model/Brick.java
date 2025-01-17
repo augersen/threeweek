@@ -1,6 +1,9 @@
 package main.Model;
 
+import main.Config;
+
 import java.awt.Color;
+import java.util.Random;
 
 /**
  * Bricks that ball can destroy. Gives a score. Mostly used in a 2d array.
@@ -8,10 +11,12 @@ import java.awt.Color;
  */
 public class Brick extends Entity {
     private int score;
+    private boolean live;
 
     public Brick(){
         super();
         this.score = 0;
+        this.live = true;
     }
 
     //Returns score as a string
@@ -30,10 +35,17 @@ public class Brick extends Entity {
         this.score = score;
     }
 
+    //Moves brick off screen, available to fetch when resetting round.
     public void destroyBrick(){
-        this.setPosition(-50,-50);
-        this.setSizes(0,0);
-        this.setColor(Color.black);
-        this.setScore(0);
+        this.setPosition(this.getX()- Config.SCREEN_WIDTH,this.getY());
+        this.live = false;
+    }
+
+    public boolean isLive(){
+        return live;
+    }
+
+    public void setLive(boolean live){
+        this.live = live;
     }
 }
