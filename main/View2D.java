@@ -54,10 +54,78 @@ public class View2D extends JPanel implements Runnable{
                 ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
                 backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
                 break;
-            case "battlepass3":
+/*          case "Battlepass3":
                 ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
                 backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
                 break;
+            case "Battlepass4":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass5":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break;
+            case "Battlepass6":
+                ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass7":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass8":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break;
+            case "Battlepass9":
+                ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass10":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass11":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break;
+            case "Battlepass12":
+                ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass13":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass14":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break;
+            case "Battlepass15":
+                ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass16":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass17":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break;
+            case "Battlepass18":
+                ballImage = new ImageIcon("main/resources/images/ltc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass19":
+                ballImage = new ImageIcon("main/resources/images/btc-logo.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/Elon.png").getImage();
+                break;
+            case "Battlepass20":
+                ballImage = new ImageIcon("main/resources/images/blue-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/tiger-bg.png").getImage();
+                break; */
             default:
                 ballImage = new ImageIcon("main/resources/images/pink-ball.png").getImage();
                 backgroundImage = new ImageIcon("main/resources/images/black-bg.jpg").getImage();
