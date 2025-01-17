@@ -18,6 +18,9 @@ public class View2D extends JPanel implements Runnable{
     private Stage gameStage;
     private java.awt.Image ballImage; 
     private java.awt.Image backgroundImage; 
+    private java.awt.Image flameIcon = new ImageIcon("main/resources/images/flame-icon.png").getImage();
+    private java.awt.Image bombIcon = new ImageIcon("main/resources/images/bomb-icon.png").getImage();
+    private java.awt.Image plusIcon = new ImageIcon("main/resources/images/plus-icon.png").getImage();
 
     int FPS = Config.FPS;
 
@@ -298,12 +301,23 @@ public class View2D extends JPanel implements Runnable{
             }
         }
 
-        for(Powerup powerup : objects.powerups) {
-            g2.setColor(Color.white);
-            g2.fillOval(powerup.getX()-2,powerup.getY()-2, powerup.getSizeX()+4, powerup.getSizeY()+4);
-            g2.setColor(powerup.getColor());
-            g2.fillOval(powerup.getX(),powerup.getY(), powerup.getSizeX(), powerup.getSizeY());
+        for (Powerup powerup : objects.powerups) {
+            java.awt.Image icon = null;
+            switch (powerup.getChoice()) {
+                case 0: // Bomb
+                    icon = bombIcon;
+                    break;
+                case 1: // Flame
+                    icon = flameIcon;
+                    break;
+                case 2: // Plus
+                    icon = plusIcon;
+                    break;
+            }
+            
+            g2.drawImage(icon, powerup.getX(), powerup.getY(), powerup.getSizeX(), powerup.getSizeY(), null);
         }
+        
 
         // Bricks
         int brickCount = 0;
