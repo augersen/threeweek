@@ -17,12 +17,6 @@ import javafx.util.Duration;
 import main.Config;
 import main.ScoreManager;
 import main.SoundController;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +43,7 @@ public class BattlepassMenu extends Application {
     
         int totalScore = 0;
     
-        // Reads and finds the sum
+        // Finds the sum
         for (String modifier : modifiers) {
             List<Integer> scores = ScoreManager.readScores(modifier);
             totalScore += scores.stream().mapToInt(Integer::intValue).sum();
@@ -107,7 +101,7 @@ public class BattlepassMenu extends Application {
             // Show picture if unlocked, else locked-image
             String imagePath = i <= unlockedAwards ? "/main/resources/images/award" + i + ".png" : "/main/resources/images/locked.png"; 
             
-            Image awardImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/images/award" + i + ".png")));
+            Image awardImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
             ImageView awardImageView = new ImageView(awardImage);
             awardImageView.setFitWidth(100); // Image size
             awardImageView.setFitHeight(100);
@@ -117,9 +111,17 @@ public class BattlepassMenu extends Application {
             Text awardText = new Text(i <= unlockedAwards ? rewardNames[i - 1] : "Locked"); // Shows 'Locked' if item is locked
             awardText.getStyleClass().add("content-text");
 
+            // Points required text for locked awards
+            Text pointsRequiredText = new Text();
+            if (i > unlockedAwards) {
+                int pointsRequired = i * 500; // Points needed to unlock this award
+                pointsRequiredText.setText("Requires total score of " + pointsRequired);
+                pointsRequiredText.getStyleClass().add("content-text");
+            }
+
             // Click event for each award
             int finalI = i;
-            if (i < unlockedAwards) {  
+            if (i <= unlockedAwards) {  
                 award.setOnMouseClicked(e -> {
                     SoundController.playMenuSelectSound(AWARD_SELECT);
                     System.out.println("Clicked award: " + finalI + ", name: " + rewardNames[finalI - 1]);
@@ -128,6 +130,9 @@ public class BattlepassMenu extends Application {
             }
 
             award.getChildren().addAll(awardImageView, awardText);
+            if (i > unlockedAwards) {
+                award.getChildren().add(pointsRequiredText); // Adds points required text only for locked awards
+            }
             award.getStyleClass().add("center-aligned");
             awardsRow.getChildren().add(award);
         }
