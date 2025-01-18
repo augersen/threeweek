@@ -9,7 +9,7 @@ public class Config {
 
     // Public constants for screen width and height
     public static final int SCREEN_WIDTH = 639;
-    public static final int SCREEN_HEIGHT = (int) size.getHeight();
+    public static final int SCREEN_HEIGHT = (int) (size.getHeight() - 85);
     public static final int FPS = 60;
     public static final int BRICK_HEIGHT = 8;
     public static final int BRICK_LENGTH = 14;
