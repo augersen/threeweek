@@ -44,8 +44,8 @@ public class BattlepassMenu extends Application {
 
         // Award names
         String[] rewardNames = {
-                "Musk", "Lion", "award3", "award4", "award5", "award6", "award7", "award8", "award9", "award10", 
-                "award11", "award12", "award13", "award14", "award15", "award16", "award17", "award18", "award19", "award20",
+                "Musky", "Big Cat", "Shreek", "Gigachad", "Rock", "Feels good, man", "Morbin' time", "Dark Side", "Big Chungus", "The States", 
+                "To the moon", "Idiot sandwich", "Donda 4", "Pingo", "Wubba Lubba Dub Dub", "Jeff", "Precious", "Batman", "Thomas", "The Woz",
         };
 
         // Actions for each award

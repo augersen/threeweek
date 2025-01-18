@@ -55,80 +55,80 @@ public class View2D extends JPanel implements Runnable{
                 break;
             case "Battlepass2":
                 ballImage = new ImageIcon("main/resources/images/award2-ball.png").getImage();
-                backgroundImage = new ImageIcon("main/resources/images/award2-bg.webp").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award2-bg.png").getImage();
                 break;
-/*          case "Battlepass3":
-            ballImage = new ImageIcon("main/resources/images/award3-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award3-bg.png").getImage();
+            case "Battlepass3":
+                ballImage = new ImageIcon("main/resources/images/award3-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award3-bg.png").getImage();
                 break;
             case "Battlepass4":
-            ballImage = new ImageIcon("main/resources/images/award4-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award4-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award4-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award4-bg.png").getImage();
                 break;
             case "Battlepass5":
-            ballImage = new ImageIcon("main/resources/images/award5-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award5-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award5-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award5-bg.png").getImage();
                 break;
             case "Battlepass6":
-            ballImage = new ImageIcon("main/resources/images/award6-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award6-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award6-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award6-bg.png").getImage();
                 break;
             case "Battlepass7":
-            ballImage = new ImageIcon("main/resources/images/award7-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award7-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award7-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award7-bg.png").getImage();
                 break;
             case "Battlepass8":
-            ballImage = new ImageIcon("main/resources/images/award8-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award8-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award8-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award8-bg.png").getImage();
                 break;
             case "Battlepass9":
-            ballImage = new ImageIcon("main/resources/images/award9-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award9-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award9-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award9-bg.png").getImage();
                 break;
             case "Battlepass10":
-            ballImage = new ImageIcon("main/resources/images/award10-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award10-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award10-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award10-bg.png").getImage();
                 break;
             case "Battlepass11":
-            ballImage = new ImageIcon("main/resources/images/award11-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award11-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award11-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award11-bg.png").getImage();
                 break;
             case "Battlepass12":
-            ballImage = new ImageIcon("main/resources/images/award12-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award12-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award12-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award12-bg.png").getImage();
                 break;
             case "Battlepass13":
-            ballImage = new ImageIcon("main/resources/images/award13-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award13-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award13-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award13-bg.png").getImage();
                 break;
             case "Battlepass14":
-            ballImage = new ImageIcon("main/resources/images/award14-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award14-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award14-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award14-bg.png").getImage();
                 break;
             case "Battlepass15":
-            ballImage = new ImageIcon("main/resources/images/award15-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award15-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award15-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award15-bg.png").getImage();
                 break;
             case "Battlepass16":
-            ballImage = new ImageIcon("main/resources/images/award16-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award16-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award16-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award16-bg.png").getImage();
                 break;
             case "Battlepass17":
-            ballImage = new ImageIcon("main/resources/images/award17-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award17-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award17-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award17-bg.png").getImage();
                 break;
             case "Battlepass18":
-            ballImage = new ImageIcon("main/resources/images/award18-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award18-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award18-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award18-bg.png").getImage();
                 break;
             case "Battlepass19":
-            ballImage = new ImageIcon("main/resources/images/award19-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award19-bg.png").getImage();
+                ballImage = new ImageIcon("main/resources/images/award19-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award19-bg.png").getImage();
                 break;
             case "Battlepass20":
-            ballImage = new ImageIcon("main/resources/images/award20-ball.png").getImage();
-            backgroundImage = new ImageIcon("main/resources/images/award20-bg.png").getImage();
-                break; */
+                ballImage = new ImageIcon("main/resources/images/award20-ball.png").getImage();
+                backgroundImage = new ImageIcon("main/resources/images/award20-bg.png").getImage();
+                break; 
             default:
                 ballImage = new ImageIcon("main/resources/images/pink-ball.png").getImage();
                 backgroundImage = new ImageIcon("main/resources/images/black-bg.jpg").getImage();
