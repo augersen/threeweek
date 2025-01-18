@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -69,20 +70,29 @@ public class HighscoresMenu extends Application {
         });
         backButton.getStyleClass().add("default-button");
 
-        // Layout
-        VBox layout = new VBox(20);
-        layout.getChildren().addAll(title, content, highscoreSections, backButton);
-        layout.setPadding(new Insets(20));
-        layout.getStyleClass().addAll("scene-background", "center-aligned");
+        // Main content VBox
+        VBox contentLayout = new VBox(20);
+        contentLayout.getChildren().addAll(title, content, highscoreSections, backButton);
+        contentLayout.setPadding(new Insets(20));
+        contentLayout.getStyleClass().addAll("scene-background", "center-aligned");
+
+        // Add VBox to ScrollPane
+        ScrollPane scrollPane = new ScrollPane(contentLayout);
+        scrollPane.setFitToWidth(true); // Match ScrollPane width to content
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Disable horizontal scrolling
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Enable vertical scrolling
+
+        // Set ScrollPane background to black
+        scrollPane.setStyle("-fx-background-color: black; -fx-background: black;");
 
         // Scene and Stage Setup
-        Scene scene = new Scene(layout, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        Scene scene = new Scene(scrollPane, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
-    }
+        }
 
     private void addHighscoreSection(VBox container, String sectionTitle, String modifier) {
         // Title for the section
