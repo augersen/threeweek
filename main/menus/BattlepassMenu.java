@@ -15,9 +15,16 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.Config;
+import main.ScoreManager;
 import main.SoundController;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,6 +37,27 @@ public class BattlepassMenu extends Application {
 
     public static String battlepassConfig = "NothingApplied";
 
+    private int calculateTotalScore() {
+        // List score-files
+        List<String> modifiers = List.of(
+            "NoModifier",
+            "ExampleModifier",
+            "PlatformModifier",
+            "PowerupModifier",
+            "PlaceholderModifier"
+        );
+    
+        int totalScore = 0;
+    
+        // Reads and finds the sum
+        for (String modifier : modifiers) {
+            List<Integer> scores = ScoreManager.readScores(modifier);
+            totalScore += scores.stream().mapToInt(Integer::intValue).sum();
+        }
+    
+        return totalScore;
+    }
+    
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Battlepass");
@@ -38,15 +66,29 @@ public class BattlepassMenu extends Application {
         root.getStyleClass().add("stackpane-root");
         root.setPadding(new Insets(0));
 
+        int totalScore = calculateTotalScore();
+        int unlockedAwards = totalScore / 500; // 1 award for every 500 score
+        
         // Title
         Text title = new Text("Battlepass");
         title.getStyleClass().addAll("title-text", "centered-text");
+
+        // Score text
+        Text scoreText;
+        if (totalScore > 0) {
+            scoreText = new Text("Total Score: " + totalScore);
+        } else {
+            scoreText = new Text("No scores found. Play to earn points!");
+        }
+        scoreText.getStyleClass().addAll("score-text", "center-aligned");
 
         // Award names
         String[] rewardNames = {
                 "Musky", "Big Cat", "Shreek", "Gigachad", "Rock", "Feels good, man", "Morbin' time", "Dark Side", "Big Chungus", "The States", 
                 "To the moon", "Idiot sandwich", "Donda 4", "Pingo", "Wubba Lubba Dub Dub", "Jeff", "Precious", "Batman", "Thomas", "The Woz",
         };
+
+        
 
         // Actions for each award
         Map<Integer, Runnable> rewardActions = new HashMap<>();
@@ -62,6 +104,9 @@ public class BattlepassMenu extends Application {
         for (int i = 1; i <= rewardNames.length; i++) {
             VBox award = new VBox(10); // Spacing between rectangle and text
 
+            // Show picture if unlocked, else locked-image
+            String imagePath = i <= unlockedAwards ? "/main/resources/images/award" + i + ".png" : "/main/resources/images/locked.png"; 
+            
             Image awardImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/main/resources/images/award" + i + ".png")));
             ImageView awardImageView = new ImageView(awardImage);
             awardImageView.setFitWidth(100); // Image size
@@ -69,16 +114,18 @@ public class BattlepassMenu extends Application {
             awardImageView.setPreserveRatio(true);
 
             // Award text
-            Text awardText = new Text(rewardNames[i - 1]); // Name from rewardNames
+            Text awardText = new Text(i <= unlockedAwards ? rewardNames[i - 1] : "Locked"); // Shows 'Locked' if item is locked
             awardText.getStyleClass().add("content-text");
 
             // Click event for each award
             int finalI = i;
-            award.setOnMouseClicked(e -> {
-                SoundController.playMenuSelectSound(AWARD_SELECT);
-                System.out.println("Clicked award: " + finalI + ", name: " + rewardNames[finalI - 1]);
-                rewardActions.getOrDefault(finalI, () -> showPopUp("No action for award: " + finalI)).run();
-            });
+            if (i < unlockedAwards) {  
+                award.setOnMouseClicked(e -> {
+                    SoundController.playMenuSelectSound(AWARD_SELECT);
+                    System.out.println("Clicked award: " + finalI + ", name: " + rewardNames[finalI - 1]);
+                    rewardActions.getOrDefault(finalI, () -> showPopUp("No action for award: " + finalI)).run();
+                });
+            }
 
             award.getChildren().addAll(awardImageView, awardText);
             award.getStyleClass().add("center-aligned");
@@ -106,7 +153,8 @@ public class BattlepassMenu extends Application {
 
         // Layout
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(title, scrollPane, backButton);
+        layout.getChildren().addAll(title, scoreText, scrollPane, backButton);
+        layout.setPadding(new Insets(20));
         layout.getStyleClass().addAll("center-aligned", "scene-background");
 
         root.getChildren().add(layout); // add the main layout to the root
@@ -114,8 +162,9 @@ public class BattlepassMenu extends Application {
         // Scene
         Scene scene = new Scene(root, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/main/resources/styles.css")).toExternalForm()); // Import CSS class
-
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 
