@@ -12,7 +12,7 @@ public class Model {
     private int height;
     private int length;
     private Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-    private int sizeX = (int) (size.getWidth() / 2.5 / 14 - 5);
+    private int sizeX = Config.SCREEN_WIDTH / Config.BRICK_LENGTH - 4;
     private int sizeY = 25;
 
     public Model(int height, int length){
